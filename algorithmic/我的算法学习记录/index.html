@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog-prik/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog-prik/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog-prik/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog-prik/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog-prik/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"trzoey.github.io","root":"/blog-prik/","scheme":"Mist","version":"8.0.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="本文是对自己算法学习的一个记录，囊括了算法初学者需要优先掌握的各类题目及解题思路和解题方法。记录于此一方面是分享给比较迷茫的算法初学者，可以参考这个大纲来刷题；另一方面是方便自己随时回顾。代码一定要自己写，而且要经常回顾，重新写。光靠看是没有用的，不自己写一遍都不知道自己能写出多少bug。学习大纲摘自极客时间专栏：数据结构与算法之美 - 王争 - 极客时间部分算法题目参考自极客时间专栏：算法面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的算法学习记录">
+<meta property="og:url" content="https://trzoey.github.io/blog-prik/algorithmic/%E6%88%91%E7%9A%84%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="PRIK&#39;s BLOG">
+<meta property="og:description" content="本文是对自己算法学习的一个记录，囊括了算法初学者需要优先掌握的各类题目及解题思路和解题方法。记录于此一方面是分享给比较迷茫的算法初学者，可以参考这个大纲来刷题；另一方面是方便自己随时回顾。代码一定要自己写，而且要经常回顾，重新写。光靠看是没有用的，不自己写一遍都不知道自己能写出多少bug。学习大纲摘自极客时间专栏：数据结构与算法之美 - 王争 - 极客时间部分算法题目参考自极客时间专栏：算法面试">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-08T13:14:28.000Z">
+<meta property="article:modified_time" content="2021-03-19T07:28:31.293Z">
+<meta property="article:author" content="prik">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://trzoey.github.io/blog-prik/algorithmic/%E6%88%91%E7%9A%84%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>我的算法学习记录 | PRIK's BLOG</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog-prik/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">PRIK's BLOG</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog-prik/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog-prik/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog-prik/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog-prik/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/blog-prik/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E3%80%81%E6%A0%88%E3%80%81%E9%98%9F%E5%88%97"><span class="nav-text">数组、栈、队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-text">数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%88"><span class="nav-text">栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%9F%E5%88%97"><span class="nav-text">队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-text">链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E5%BD%92"><span class="nav-text">递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E3%80%81%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-text">排序、二分查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%B3%E8%A1%A8"><span class="nav-text">跳表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%A3%E5%88%97%E8%A1%A8"><span class="nav-text">散列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95"><span class="nav-text">哈希算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-text">二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="nav-text">红黑树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%A0%91"><span class="nav-text">B+ 树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E4%B8%8E%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="nav-text">堆与堆排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-text">图的表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="nav-text">深度广度优先搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E3%80%81%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E3%80%81A-%E7%AE%97%E6%B3%95"><span class="nav-text">拓扑排序、最短路径、A* 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88BF%E3%80%81RK%EF%BC%89"><span class="nav-text">字符串匹配（BF、RK）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88BM%E3%80%81KMP%E3%80%81AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%89"><span class="nav-text">字符串匹配（BM、KMP、AC 自动机）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88Trie%EF%BC%89"><span class="nav-text">字符串匹配（Trie）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E5%9B%BE"><span class="nav-text">位图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E7%A7%8D%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3"><span class="nav-text">四种算法思想</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%B2%BB"><span class="nav-text">分治</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83"><span class="nav-text">贪心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%BA%AF"><span class="nav-text">回溯</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="prik"
+      src="/blog-prik/images/logo_white.png">
+  <p class="site-author-name" itemprop="name">prik</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog-prik/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog-prik/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog-prik/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/TrZoey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;TrZoey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xushiwei7066@foxmail.com" title="E-Mail → mailto:xushiwei7066@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/blog-prik/about/" title="Wechat → &#x2F;about&#x2F;"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://trzoey.github.io/blog-prik/algorithmic/%E6%88%91%E7%9A%84%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog-prik/images/logo_white.png">
+      <meta itemprop="name" content="prik">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PRIK's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          我的算法学习记录
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-08 21:14:28" itemprop="dateCreated datePublished" datetime="2021-03-08T21:14:28+08:00">2021-03-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-03-19 15:28:31" itemprop="dateModified" datetime="2021-03-19T15:28:31+08:00">2021-03-19</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-prik/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-user"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>本文是对自己算法学习的一个记录，囊括了算法初学者需要优先掌握的各类题目及解题思路和解题方法。记录于此一方面是分享给比较迷茫的算法初学者，可以参考这个大纲来刷题；另一方面是方便自己随时回顾。<br>代码一定要自己写，而且要经常回顾，重新写。光靠看是没有用的，不自己写一遍都不知道自己能写出多少bug。<br>学习大纲摘自极客时间专栏：<a target="_blank" rel="noopener" href="https://time.geekbang.org/column/intro/126">数据结构与算法之美 - 王争 - 极客时间</a><br>部分算法题目参考自极客时间专栏：<a target="_blank" rel="noopener" href="https://time.geekbang.org/course/intro/100019701">算法面试通关40讲 - 覃超 - 极客时间</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>尽管在专栏中，我只用了两节课的内容，来讲复杂度分析这个知识点。但是，我想说的是，它真的非常重要。你必须要牢牢掌握这两节，基本上要做到，简单代码能很快分析出时间、空间复杂度；对于复杂点的代码，比如递归代码，你也要掌握专栏中讲到的两种分析方法：递推公式和递归树。对于初学者来说，光看入门篇的两节复杂度分析文章，可能还不足以完全掌握复杂度分析。不过，在后续讲解每种数据结构和算法的时候，我都有详细分析它们的时间、空间复杂度。所以，你可以在学习专栏中其他章节的时候，再不停地、有意识地去训练自己的复杂度分析能力。</p>
+<p>难易程度：Medium<br>是否重点：10 分<br>掌握程度：在不看我的分析的情况下，能自行分析专栏中大部分数据结构和算法的时间、空间复杂度</p>
+<h2 id="数组、栈、队列"><a href="#数组、栈、队列" class="headerlink" title="数组、栈、队列"></a>数组、栈、队列</h2><p>这一部分内容非常简单，初学者学起来也不会很难。但是，作为基础的数据结构，数组、栈、队列，是后续很多复杂数据结构和算法的基础，所以，这些内容你一定要掌握。</p>
+<p>难易程度：Easy<br>是否重点：8 分<br>掌握程度：能自己实现动态数组、栈、队列</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p><a href="/blog-prik/algorithmic/15.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">88. 合并两个有序数组</a><br><a href="/blog-prik/algorithmic/88.%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84/">15. 三数之和</a>🌟<br><a href="/blog-prik/algorithmic/169.%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0/">169. 找众数（多数元素）</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115991054/">41. 缺失的第一个正数（原地哈希）</a>🌟</p>
+<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/116212481/">20. 有效的括号</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/116949181/">32. 最长有效括号（动态规划）</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/116958795/">32. 最长有效括号（正逆向结合）</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/116979139/">32. 最长有效括号（栈）</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/117035010/">155. 最小栈（辅助栈）</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-queue-using-stacks/solution/yong-zhan-shi-xian-dui-lie-by-leetcode/">232. 用栈实现队列（用两个栈来回倒腾）</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/117617906/">844. 比较含退格的字符串</a><br>TODO 224,682,496</p>
+<h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/122351390/">703. 数据流中的第K大元素（优先级队列）</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/127670400/">239. 滑动窗口最大值（双端队列）</a>🌟</p>
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><p>链表非常重要！虽然理论内容不多，但链表上的操作却很复杂。所以，面试中经常会考察，你一定要掌握。而且，我这里说“掌握”不只是能看懂专栏中的内容，还能将专栏中提到的经典链表题目，比如链表反转、求中间结点等，轻松无 bug 地实现出来。</p>
+<p>难易程度：Medium<br>是否重点：9 分<br>掌握程度：能轻松写出经典链表题目代码</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115694463/">206. 反转链表</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115711094/">208. 合并两个有序链表</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115714967/">876. 寻找链表的中间节点</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115720051/">141. 环形链表（判断是否有环）</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115736686/">142. 环形链表（找入环点）</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115883926/">23. 合并K个升序链表</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/117024625/">19. 删除链表倒数第N个节点</a>🌟（重做）</p>
+<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><p>对于初学者来说，递归代码非常难掌握，不管是读起来，还是写起来。但是，这道坎你必须要跨过，跨不过就不能算是入门数据结构和算法。我们后面讲到的很多数据结构和算法的代码实现，都要用到递归。<br>递归相关的理论知识也不多，所以还是要多练。你可以先在网上找些简单的题目练手，比如斐波那契数列、求阶乘等，然后再慢慢过渡到更加有难度的，比如归并排序、快速排序、二叉树的遍历、求高度，最后是回溯八皇后、背包问题等。<br>难易程度：Hard<br>是否重点：10 分<br>掌握程度：轻松写出二叉树遍历、八皇后、背包问题、DFS 的递归代码</p>
+<h2 id="排序、二分查找"><a href="#排序、二分查找" class="headerlink" title="排序、二分查找"></a>排序、二分查找</h2><p>这一部分并不难，你只需要能看懂我专栏里的内容即可。<br>难易程度：Easy<br>是否重点：7 分<br>掌握程度：能自己把各种排序算法、二分查找及其变体代码写一遍就可以了</p>
+<h2 id="跳表"><a href="#跳表" class="headerlink" title="跳表"></a>跳表</h2><p>对于初学者来说，并不需要非得掌握跳表，所以，如果没有精力，这一章节可以先跳过。<br>难易程度：Medium<br>是否重点：6 分<br>掌握程度：初学者可以先跳过。如果感兴趣，看懂专栏内容即可，不需要掌握代码实现</p>
+<h2 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h2><p>尽管散列表的内容我讲了很多，有三节课。但是，总体上来讲，这块内容理解起来并不难。但是，作为一种应用非常广泛的数据结构，你还是要掌握牢固散列表。<br>难易程度：Medium<br>是否重点：8 分<br>掌握程度：对于初学者来说，自己能代码实现一个拉链法解决冲突的散列表即可</p>
+<h2 id="哈希算法"><a href="#哈希算法" class="headerlink" title="哈希算法"></a>哈希算法</h2><p>这部分纯粹是为了开拓思路，初学者可以略过。<br>难易程度：Easy<br>是否重点：3 分<br>掌握程度：可以暂时不看</p>
+<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><p>这一部分非常重要！二叉树在面试中经常会被考到，所以要重点掌握。但是我这里说的二叉树，并不包含专栏中红黑树的内容。红黑树我们待会再讲。<br>难易程度：Medium<br>是否重点：9 分<br>掌握程度：能代码实现二叉树的三种遍历算法、按层遍历、求高度等经典二叉树题目</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/129685104/">94. 二叉树的中序遍历（144、145前/后序遍历）</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/129531789/">98. 验证二叉搜索树（递归）</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/129690118/">98. 验证二叉搜索树（中序遍历）</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/131074768/">236. 二叉树的最近公共祖先</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/131934712/">235. 二叉搜索树的最近公共祖先</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/136238474/">102. 二叉树的层序遍历（广度优先）</a>🌟</p>
+<p>105、107、987、104、111、</p>
+<h2 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h2><p>对于初学者来说，这一节课完全可以不看。<br>难易程度：Hard<br>是否重点：3 分<br>掌握程度：初学者不用把时间浪费在上面</p>
+<h2 id="B-树"><a href="#B-树" class="headerlink" title="B+ 树"></a>B+ 树</h2><p>虽然 B+ 树也算是比较高级的一种数据结构了，但是对初学者来说，也不是重点。有时候面试的时候还是会问的，所以这一部分内容，你能看懂专栏里的讲解就可以了。<br>难易程度：Medium<br>是否重点：5 分<br>掌握程度：可看可不看</p>
+<h2 id="堆与堆排序"><a href="#堆与堆排序" class="headerlink" title="堆与堆排序"></a>堆与堆排序</h2><p>这一部分内容不是很难，初学者也是要掌握的。<br>难易程度：Medium<br>是否重点：8 分<br>掌握程度：能代码实现堆、堆排序，并且掌握堆的三种应用（优先级队列、Top k、中位数）</p>
+<h2 id="图的表示"><a href="#图的表示" class="headerlink" title="图的表示"></a>图的表示</h2><p>图的内容很多，但是初学者不需要掌握那么多。一般 BAT 等大厂面试，不怎么会面试有关图的内容，因为面试官可能也对这块不会很熟悉哈：）。但是，最基本图的概念、表示方法还是要掌握的。<br>难易程度：Easy<br>是否重点：8 分<br>掌握程度：理解图的三种表示方法（邻接矩阵、邻接表、逆邻接表），能自己代码实现</p>
+<h2 id="深度广度优先搜索"><a href="#深度广度优先搜索" class="headerlink" title="深度广度优先搜索"></a>深度广度优先搜索</h2><p>这算是图上最基础的遍历或者说是搜索算法了，所以还是要掌握一下。这两种算法的原理都不难哈，但是代码实现并不简单，一个用到了队列，另一个用到了递归。对于初学者来说，看懂这两个代码实现就是一个挑战！可以等到其他更重要的内容都掌握之后，再来挑战，也是可以的。<br>难易程度：Hard<br>是否重点：8 分<br>掌握程度：能代码实现广度优先、深度优先搜索算法</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/136238474/">102. 二叉树的层序遍历（广度优先）</a>🌟</p>
+<h2 id="拓扑排序、最短路径、A-算法"><a href="#拓扑排序、最短路径、A-算法" class="headerlink" title="拓扑排序、最短路径、A* 算法"></a>拓扑排序、最短路径、A* 算法</h2><p>这几个算法稍微高级点。如果你能轻松实现深度、广度优先搜索，那看懂这三个算法不成问题。不过，这三种算法不是重点。面试不会考的。<br>难易程度：Hard<br>是否重点：5 分<br>掌握程度：有时间再看，暂时可以不看</p>
+<h2 id="字符串匹配（BF、RK）"><a href="#字符串匹配（BF、RK）" class="headerlink" title="字符串匹配（BF、RK）"></a>字符串匹配（BF、RK）</h2><p>BF 非常简单，RK 稍微复杂点，但都不难。这个最好还是掌握下。<br>难易程度：Easy<br>是否重点：7 分<br>掌握程度：能实践 BF 算法，能看懂 RK 算法</p>
+<h2 id="字符串匹配（BM、KMP、AC-自动机）"><a href="#字符串匹配（BM、KMP、AC-自动机）" class="headerlink" title="字符串匹配（BM、KMP、AC 自动机）"></a>字符串匹配（BM、KMP、AC 自动机）</h2><p>这三个算法都挺难的，对于算法有一定基础的人来说，看懂也不容易。所以，对于初学者来说，千万别浪费时间在这上面。即便有余力，看懂就好了，不用非得能自己实现。<br>难易程度：Hard<br>是否重点：3 分<br>掌握程度：初学者不用把时间浪费在上面</p>
+<h2 id="字符串匹配（Trie）"><a href="#字符串匹配（Trie）" class="headerlink" title="字符串匹配（Trie）"></a>字符串匹配（Trie）</h2><p>这个还是要能看懂，不过不需要能代码实现。有些面试官喜欢考这个东西，主要是结合应用场景来考察，只是看你知不知道要用 Trie 树这个东西。<br>难易程度：Medium<br>是否重点：7 分<br>掌握程度：能看懂，知道特点、应用场景即可，不要求代码实现</p>
+<h2 id="位图"><a href="#位图" class="headerlink" title="位图"></a>位图</h2><p>位图不是重点，如果有余力最好掌握一下。<br>难易程度：Easy<br>是否重点：6 分<br>掌握程度：看懂即可，能自己实现一个位图结构最好</p>
+<h2 id="四种算法思想"><a href="#四种算法思想" class="headerlink" title="四种算法思想"></a>四种算法思想</h2><p>这个是重点，也是难点。<strong>贪心、分治、回溯、动态规划</strong>，每一个都不简单，其中动态规划又是最难、最烧脑的。要应付 FLAG 这样公司的面试，必须拿下这块内容。但是呢，学习要循序渐进，这块内容的学习可以放到最后，做个长时间的学习计划来攻克。这块内容理论的东西不多，要想真的掌握，还是要大量刷题。<br>难易程度：Hard<br>是否重点：10 分<br>掌握程度：可以放到最后，但是一定要掌握！做到能实现 Leetcode 上 Medium 难度的题目</p>
+<h3 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/132711904/">50. Pow(x, n)（求x的n次方）</a>🌟</p>
+<h3 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/136180783/">122. 买卖股票的最佳时机 II</a>🌟</p>
+<h3 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/152528407/">22. 括号生成</a>🌟</p>
+<blockquote>
+<p>作者：prik<br>永久链接： <a href="https://trzoey.github.io/blog-prik/algorithmic/%E6%88%91%E7%9A%84%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">https://trzoey.github.io/blog-prik/algorithmic/我的算法学习记录/</a><br>转载请注明出处，谢谢合作💓。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog-prik/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog-prik/java-notes/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%89/" rel="prev" title="Redis学习笔记（基础部分）">
+                  <i class="fa fa-chevron-left"></i> Redis学习笔记（基础部分）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">prik</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
+<script src="/blog-prik/js/utils.js"></script><script src="/blog-prik/js/motion.js"></script><script src="/blog-prik/js/schemes/muse.js"></script><script src="/blog-prik/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="referrer" content="no-referrer-when-downgrade">
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '19263f2899e033a351c4',
+      clientSecret: '85ce26d420d3c7518e20ce6dee6b6eb412164304',
+      repo        : 'hexo-gittalk',
+      owner       : 'TrZoey',
+      admin       : ['TrZoey'],
+      id          : 'f8eadcf037f6e01902fc5e31893a986f',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

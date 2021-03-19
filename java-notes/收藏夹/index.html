@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog-prik/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog-prik/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog-prik/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog-prik/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog-prik/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"trzoey.github.io","root":"/blog-prik/","scheme":"Mist","version":"8.0.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="✔️ 数据结构&amp;算法 数据结构与算法之美 - 王争 - 极客时间学习数据结构与算法必入专栏，强烈推荐！个人心中给小争哥排为极客时间里最会讲解的作者之一。还要推荐另一个：设计模式之美 - 王争 - 极客时间  算法面试通关40讲 - 覃超 - 极客时间应对要求不是特别高的算法面试很足够了，配合楼上小争哥的《设计模式之美》食用，口味更佳。  清晰理解红黑树的演变—红黑的含义 - 甜菜波波“ 红">
+<meta property="og:type" content="article">
+<meta property="og:title" content="优秀书籍、文章、专栏收集及推荐（持续更新 ...）">
+<meta property="og:url" content="https://trzoey.github.io/blog-prik/java-notes/%E6%94%B6%E8%97%8F%E5%A4%B9/index.html">
+<meta property="og:site_name" content="PRIK&#39;s BLOG">
+<meta property="og:description" content="✔️ 数据结构&amp;算法 数据结构与算法之美 - 王争 - 极客时间学习数据结构与算法必入专栏，强烈推荐！个人心中给小争哥排为极客时间里最会讲解的作者之一。还要推荐另一个：设计模式之美 - 王争 - 极客时间  算法面试通关40讲 - 覃超 - 极客时间应对要求不是特别高的算法面试很足够了，配合楼上小争哥的《设计模式之美》食用，口味更佳。  清晰理解红黑树的演变—红黑的含义 - 甜菜波波“ 红">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-03T06:38:19.000Z">
+<meta property="article:modified_time" content="2021-03-19T06:49:04.419Z">
+<meta property="article:author" content="prik">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://trzoey.github.io/blog-prik/java-notes/%E6%94%B6%E8%97%8F%E5%A4%B9/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>优秀书籍、文章、专栏收集及推荐（持续更新 ...） | PRIK's BLOG</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog-prik/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">PRIK's BLOG</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog-prik/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog-prik/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog-prik/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog-prik/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/blog-prik/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%94%EF%B8%8F-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-amp-%E7%AE%97%E6%B3%95"><span class="nav-text">✔️ 数据结构&amp;算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%94%EF%B8%8F-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-text">✔️ 设计模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%94%EF%B8%8F-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">✔️ 数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%94%EF%B8%8F-JVM"><span class="nav-text">✔️ JVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%94%EF%B8%8F-%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-text">✔️ 多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%94%EF%B8%8F-%E5%88%86%E5%B8%83%E5%BC%8F"><span class="nav-text">✔️ 分布式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%94%EF%B8%8F-%E5%85%B6%E4%BB%96"><span class="nav-text">✔️ 其他</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="prik"
+      src="/blog-prik/images/logo_white.png">
+  <p class="site-author-name" itemprop="name">prik</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog-prik/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog-prik/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog-prik/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/TrZoey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;TrZoey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xushiwei7066@foxmail.com" title="E-Mail → mailto:xushiwei7066@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/blog-prik/about/" title="Wechat → &#x2F;about&#x2F;"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://trzoey.github.io/blog-prik/java-notes/%E6%94%B6%E8%97%8F%E5%A4%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog-prik/images/logo_white.png">
+      <meta itemprop="name" content="prik">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PRIK's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          优秀书籍、文章、专栏收集及推荐（持续更新 ...）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-03 14:38:19" itemprop="dateCreated datePublished" datetime="2020-12-03T14:38:19+08:00">2020-12-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-03-19 14:49:04" itemprop="dateModified" datetime="2021-03-19T14:49:04+08:00">2021-03-19</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-prik/categories/Java%E5%A4%A7%E4%B9%B1%E7%82%96/" itemprop="url" rel="index"><span itemprop="name">Java大乱炖</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-user"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="✔️-数据结构-amp-算法"><a href="#✔️-数据结构-amp-算法" class="headerlink" title="✔️ 数据结构&amp;算法"></a>✔️ 数据结构&amp;算法</h3><ol>
+<li><p><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/intro/126">数据结构与算法之美 - 王争 - 极客时间</a><br>学习数据结构与算法必入专栏，强烈推荐！个人心中给小争哥排为极客时间里最会讲解的作者之一。<br>还要推荐另一个：<a target="_blank" rel="noopener" href="https://time.geekbang.org/column/intro/250">设计模式之美 - 王争 - 极客时间</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://time.geekbang.org/course/intro/100019701">算法面试通关40讲 - 覃超 - 极客时间</a><br>应对要求不是特别高的算法面试很足够了，配合楼上小争哥的《设计模式之美》食用，口味更佳。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tiancai/p/9072813.html">清晰理解红黑树的演变—红黑的含义 - 甜菜波波</a><br>“ 红黑树，对不少人来说是个比较头疼的名字，在网上搜资料也很少有讲清楚其演变来源的，多数一上来就给你来五条定义，红啊黑啊与根节点距离相等之类的，然后就开始进行旋转、插入、删除这些操作。一通操作下来，连红色和黑色怎么来的，是什么含义，有什么作用都云里雾里的，能搞清楚就怪了。”<br>本文介绍红黑树，暂时不涉及任何代码，只是帮助你理解红黑树的演变来源，树结构中红黑色具体含义，保证你理解了过后，再去看什么旋转插入的东西，要清晰得多。换句话说，理解本文要描述的内容是从代码级理解红黑树的基础。</p>
+</li>
+</ol>
+<a id="more"></a>
+
+
+<h3 id="✔️-设计模式"><a href="#✔️-设计模式" class="headerlink" title="✔️ 设计模式"></a>✔️ 设计模式</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/intro/250">设计模式之美 - 王争 - 极客时间</a><br>之前读过《设计模式》、《Head First设计模式》、《大话设计模式》几本书，但对设计模式的学习效果不怎么好。主要原因可能是书里的例子比较脱离实际开发，很难有非常好的理解。<br>直到遇到了小争哥的这个专栏，可以说让我对设计模式的很多知识点都有了更深刻的理解，并且真正能够在工作编码中运用设计模式来改善代码。值得反复多读几遍。</li>
+</ol>
+<h3 id="✔️-数据库"><a href="#✔️-数据库" class="headerlink" title="✔️ 数据库"></a>✔️ 数据库</h3><ol>
+<li><p><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/intro/250">MySQL实战45讲 - 林晓斌/丁奇 - 极客时间</a><br>我心目中极客时间里讲解水平与小争哥并列第一的林晓斌老师。学习MySQL必入专栏，强烈推荐！</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://book.douban.com/subject/34860934/">千金良方——MySQL性能优化金字塔法则</a><br>朋友推荐的，说很接地气，非常具有实操性。还没顾上看。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/intro/329">Redis核心技术与实战 - 蒋德钧 - 极客时间</a><br>针对 Redis 的一门入门及进阶课程，结合评论区里课代表 Katio 同学的总结和补充食用口味更佳。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Qc4t_-_pL4w8VlSoJhRDcg">Redis为什么变慢了？一文讲透如何排查Redis性能问题</a><br>Katio同学关于 Redis 性能问题排查的全面总结。</p>
+</li>
+</ol>
+<h3 id="✔️-JVM"><a href="#✔️-JVM" class="headerlink" title="✔️ JVM"></a>✔️ JVM</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/34907497/">《深入理解Java虚拟机（第3版）》</a></li>
+<li><a target="_blank" rel="noopener" href="https://tech.meituan.com/2020/11/12/java-9-cms-gc.html">Java中9种常见的CMS GC问题分析与解决 - 美团技术团队</a></li>
+</ol>
+<h3 id="✔️-多线程"><a href="#✔️-多线程" class="headerlink" title="✔️ 多线程"></a>✔️ 多线程</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/26591326/">《Java并发编程的艺术》</a></li>
+<li><a target="_blank" rel="noopener" href="https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html">Java线程池实现原理及其在美团业务中的实践 - 美团技术团队</a></li>
+</ol>
+<h3 id="✔️-分布式"><a href="#✔️-分布式" class="headerlink" title="✔️ 分布式"></a>✔️ 分布式</h3><ol>
+<li><a target="_blank" rel="noopener" href="http://zhangtielei.com/posts/blog-redlock-reasoning.html">基于Redis的分布式锁到底安全吗？</a><br>针对 Redis 的作者提出的高可用分布式锁 Redlock 算法究竟是否安全，一些业内人士和作者有过一场大讨论，本文就是记录了这场讨论的整个过程。阅读本文有助于加深对与分布式锁的理解。</li>
+</ol>
+<h3 id="✔️-其他"><a href="#✔️-其他" class="headerlink" title="✔️ 其他"></a>✔️ 其他</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903949359644680">深入剖析Linux IO原理和几种零拷贝机制的实现</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/EVequWGVMWV5Ki2llFzdHg">什么是同步/异步/阻塞/非阻塞/BIO/NIO/AIO</a></li>
+</ol>
+<blockquote>
+<p>作者：prik<br>永久链接： <a href="https://trzoey.github.io/blog-prik/java-notes/%E6%94%B6%E8%97%8F%E5%A4%B9/">https://trzoey.github.io/blog-prik/java-notes/收藏夹/</a><br>转载请注明出处，谢谢合作💓。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog-prik/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog-prik/java-blog/GHOST%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/" rel="prev" title="GHOST博客部署记录">
+                  <i class="fa fa-chevron-left"></i> GHOST博客部署记录
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog-prik/java-notes/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%8B/" rel="next" title="深入理解《深入理解Java虚拟机》">
+                  深入理解《深入理解Java虚拟机》 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">prik</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
+<script src="/blog-prik/js/utils.js"></script><script src="/blog-prik/js/motion.js"></script><script src="/blog-prik/js/schemes/muse.js"></script><script src="/blog-prik/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="referrer" content="no-referrer-when-downgrade">
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '19263f2899e033a351c4',
+      clientSecret: '85ce26d420d3c7518e20ce6dee6b6eb412164304',
+      repo        : 'hexo-gittalk',
+      owner       : 'TrZoey',
+      admin       : ['TrZoey'],
+      id          : '69f0d3a0586d4fa88b0665efc90ef888',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

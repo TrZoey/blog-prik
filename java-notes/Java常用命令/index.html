@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog-prik/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog-prik/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog-prik/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog-prik/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog-prik/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"trzoey.github.io","root":"/blog-prik/","scheme":"Mist","version":"8.0.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="记录一下Java常用的几个指令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java常用命令——jps&#x2F;jstat&#x2F;jinfo&#x2F;jmap&#x2F;jstack">
+<meta property="og:url" content="https://trzoey.github.io/blog-prik/java-notes/Java%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="PRIK&#39;s BLOG">
+<meta property="og:description" content="记录一下Java常用的几个指令">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-05T04:38:19.000Z">
+<meta property="article:modified_time" content="2020-11-30T13:37:03.863Z">
+<meta property="article:author" content="prik">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://trzoey.github.io/blog-prik/java-notes/Java%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Java常用命令——jps/jstat/jinfo/jmap/jstack | PRIK's BLOG</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog-prik/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">PRIK's BLOG</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog-prik/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog-prik/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog-prik/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog-prik/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/blog-prik/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#jps%EF%BC%9A%E8%BE%93%E5%87%BAJava%E8%BF%9B%E7%A8%8B"><span class="nav-text">jps：输出Java进程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jps"><span class="nav-text">jps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jps-v-%E8%BE%93%E5%87%BA-jvm-%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0"><span class="nav-text">jps -v 输出 jvm 启动参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jps-l-%E8%BE%93%E5%87%BA%E4%B8%BB%E7%B1%BB%E5%90%8D%E6%88%96-jar-%E5%8C%85"><span class="nav-text">jps -l 输出主类名或 jar 包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jps-l-%E8%BE%93%E5%87%BA%E4%B8%BB%E7%B1%BB%E5%90%8D%E6%88%96-jar-%E5%8C%85-1"><span class="nav-text">jps -l 输出主类名或 jar 包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jstat%EF%BC%9A%E6%9F%A5%E7%9C%8B%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81"><span class="nav-text">jstat：查看虚拟机运行状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jstat-class-pid-%E7%B1%BB%E5%8A%A0%E8%BD%BD-%E5%8D%B8%E8%BD%BD%E7%9A%84%E6%80%BB%E6%95%B0%E9%87%8F-%E6%80%BB%E7%A9%BA%E9%97%B4%E3%80%81%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%80%97%E8%B4%B9%E6%97%B6%E9%97%B4"><span class="nav-text">jstat -class [pid] 类加载&#x2F;卸载的总数量&#x2F;总空间、类加载耗费时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jstat-gc-pid-%E5%A0%86%E5%86%85%E5%AD%98%E5%90%84%E5%8C%BA%E5%9F%9F%E7%94%A8%E9%87%8F%EF%BC%8C%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E6%97%B6%E9%97%B4"><span class="nav-text">jstat -gc [pid]  堆内存各区域用量，垃圾收集时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jstat-gcutil-pid-%E4%B8%8E-gc%E5%B7%AE%E4%B8%8D%E5%A4%9A%EF%BC%8C%E4%B8%BB%E8%A6%81%E5%85%B3%E6%B3%A8%E5%B7%B2%E4%BD%BF%E7%94%A8%E7%A9%BA%E9%97%B4%E7%9A%84%E7%99%BE%E5%88%86%E6%AF%94"><span class="nav-text">jstat -gcutil [pid]  与-gc差不多，主要关注已使用空间的百分比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jinfo%EF%BC%9Ajava%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="nav-text">jinfo：java配置信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jinfo-pid-%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%90%84%E9%A1%B9%E5%8F%82%E6%95%B0"><span class="nav-text">jinfo [pid]  虚拟机各项参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jinfo-flags-pid"><span class="nav-text">jinfo -flags [pid] </span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jmap%EF%BC%9A%E5%86%85%E5%AD%98%E5%BF%AB%E7%85%A7%E5%B7%A5%E5%85%B7"><span class="nav-text">jmap：内存快照工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jmap-heap-pid-Java%E5%A0%86%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF"><span class="nav-text">jmap -heap [pid]  Java堆详细信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jmap-dump-format-b-file-xxx-bin-pid"><span class="nav-text">jmap -dump:format&#x3D;b,file&#x3D;xxx.bin [pid] </span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jstack%EF%BC%9A%E7%BA%BF%E7%A8%8B%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7"><span class="nav-text">jstack：线程分析工具</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="prik"
+      src="/blog-prik/images/logo_white.png">
+  <p class="site-author-name" itemprop="name">prik</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog-prik/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog-prik/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog-prik/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/TrZoey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;TrZoey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xushiwei7066@foxmail.com" title="E-Mail → mailto:xushiwei7066@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/blog-prik/about/" title="Wechat → &#x2F;about&#x2F;"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://trzoey.github.io/blog-prik/java-notes/Java%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog-prik/images/logo_white.png">
+      <meta itemprop="name" content="prik">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PRIK's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java常用命令——jps/jstat/jinfo/jmap/jstack
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-05 12:38:19" itemprop="dateCreated datePublished" datetime="2020-12-05T12:38:19+08:00">2020-12-05</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-11-30 21:37:03" itemprop="dateModified" datetime="2020-11-30T21:37:03+08:00">2020-11-30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-prik/categories/Java%E5%A4%A7%E4%B9%B1%E7%82%96/" itemprop="url" rel="index"><span itemprop="name">Java大乱炖</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-user"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">记录一下Java常用的几个指令</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="jps：输出Java进程"><a href="#jps：输出Java进程" class="headerlink" title="jps：输出Java进程"></a>jps：输出Java进程</h2><h3 id="jps"><a href="#jps" class="headerlink" title="jps"></a><code>jps</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prik@MacBook-Pro blog % jps</span><br><span class="line">52939 Launcher</span><br><span class="line">52684 Bootstrap</span><br><span class="line">57757 Jps</span><br><span class="line">48783 Launcher</span><br></pre></td></tr></table></figure>
+
+<h3 id="jps-v-输出-jvm-启动参数"><a href="#jps-v-输出-jvm-启动参数" class="headerlink" title="jps -v 输出 jvm 启动参数"></a><code>jps -v</code> 输出 jvm 启动参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">prik@MacBook-Pro blog % jps -v</span><br><span class="line">79558  -Xms2048m -Xmx4096m -XX:ReservedCodeCacheSize&#x3D;240m -XX:+UseCompressedOops -Dfile.encoding&#x3D;UTF-8 -XX:+UseConcMarkSweepGC -XX:SoftRefLRUPolicyMSPerMB&#x3D;50 -ea -XX:CICompilerCount&#x3D;2 -Dsun.io.useCanonCaches&#x3D;false -Djava.net.preferIPv4Stack&#x3D;true -Djdk.http.auth.tunneling.disabledSchemes&#x3D;&quot;&quot; -XX:+HeapDumpOnOutOfMemoryError -XX:-OmitStackTraceInFastThrow -Xverify:none -Didea.paths.selector&#x3D;IntelliJIdea2020.1 -Didea.executable&#x3D;idea -Didea.home.path&#x3D;&#x2F;Applications&#x2F;IntelliJ IDEA.app&#x2F;Contents -Didea.vendor.name&#x3D;JetBrains</span><br><span class="line">57804 Jps -Dapplication.home&#x3D;&#x2F;Library&#x2F;Java&#x2F;JavaVirtualMachines&#x2F;jdk1.8.0_241.jdk&#x2F;Contents&#x2F;Home -Xms8m</span><br></pre></td></tr></table></figure>
+
+<h3 id="jps-l-输出主类名或-jar-包"><a href="#jps-l-输出主类名或-jar-包" class="headerlink" title="jps -l 输出主类名或 jar 包"></a><code>jps -l</code> 输出主类名或 jar 包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prik@MacBook-Pro blog % jps -l</span><br><span class="line">52939 org.jetbrains.jps.cmdline.Launcher</span><br><span class="line">52684 org.apache.catalina.startup.Bootstrap</span><br><span class="line">57871 sun.tools.jps.Jps</span><br><span class="line">48783 org.jetbrains.jps.cmdline.Launcher</span><br></pre></td></tr></table></figure>
+
+<h3 id="jps-l-输出主类名或-jar-包-1"><a href="#jps-l-输出主类名或-jar-包-1" class="headerlink" title="jps -l 输出主类名或 jar 包"></a><code>jps -l</code> 输出主类名或 jar 包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prik@MacBook-Pro blog % jps -l</span><br><span class="line">52939 org.jetbrains.jps.cmdline.Launcher</span><br><span class="line">52684 org.apache.catalina.startup.Bootstrap</span><br><span class="line">57871 sun.tools.jps.Jps</span><br><span class="line">48783 org.jetbrains.jps.cmdline.Launcher</span><br></pre></td></tr></table></figure>
+
+<h2 id="jstat：查看虚拟机运行状态"><a href="#jstat：查看虚拟机运行状态" class="headerlink" title="jstat：查看虚拟机运行状态"></a>jstat：查看虚拟机运行状态</h2><h3 id="jstat-class-pid-类加载-卸载的总数量-总空间、类加载耗费时间"><a href="#jstat-class-pid-类加载-卸载的总数量-总空间、类加载耗费时间" class="headerlink" title="jstat -class [pid] 类加载/卸载的总数量/总空间、类加载耗费时间"></a><code>jstat -class [pid]</code> 类加载/卸载的总数量/总空间、类加载耗费时间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">prik@MacBook-Pro blog % jstat -class 52684</span><br><span class="line">Loaded  Bytes  Unloaded  Bytes     Time   </span><br><span class="line"> 22176 50351.6        7     6.0      38.70</span><br></pre></td></tr></table></figure>
+
+<h3 id="jstat-gc-pid-堆内存各区域用量，垃圾收集时间"><a href="#jstat-gc-pid-堆内存各区域用量，垃圾收集时间" class="headerlink" title="jstat -gc [pid]  堆内存各区域用量，垃圾收集时间"></a><code>jstat -gc [pid] </code> 堆内存各区域用量，垃圾收集时间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pirk@MacBook-Pro blog % jstat -gc 52684</span><br><span class="line"> S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT     GCT   </span><br><span class="line">176128.0 36864.0  0.0   36497.5 2127872.0 954779.6 1054208.0   262758.6  180376.0 173432.4 17584.0 16469.6     31    1.072   5      0.865    1.937</span><br></pre></td></tr></table></figure>
+
+<h3 id="jstat-gcutil-pid-与-gc差不多，主要关注已使用空间的百分比"><a href="#jstat-gcutil-pid-与-gc差不多，主要关注已使用空间的百分比" class="headerlink" title="jstat -gcutil [pid]  与-gc差不多，主要关注已使用空间的百分比"></a><code>jstat -gcutil [pid] </code> 与-gc差不多，主要关注已使用空间的百分比</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">prik@MacBook-Pro blog % jstat -gcutil 52684</span><br><span class="line">  S0     S1     E      O      M     CCS    YGC     YGCT    FGC    FGCT     GCT   </span><br><span class="line">  0.00  99.01  44.96  24.92  96.15  93.66     31    1.072     5    0.865    1.937</span><br></pre></td></tr></table></figure>
+
+<h2 id="jinfo：java配置信息"><a href="#jinfo：java配置信息" class="headerlink" title="jinfo：java配置信息"></a>jinfo：java配置信息</h2><h3 id="jinfo-pid-虚拟机各项参数"><a href="#jinfo-pid-虚拟机各项参数" class="headerlink" title="jinfo [pid]  虚拟机各项参数"></a><code>jinfo [pid] </code> 虚拟机各项参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">prik@MacBook-Pro blog % jinfo 20743</span><br><span class="line">Attaching to process ID 20743, please wait...</span><br><span class="line">Debugger attached successfully.</span><br><span class="line">Client compiler detected.</span><br><span class="line">JVM version is 25.151-b12</span><br><span class="line">Java System Properties:</span><br><span class="line"></span><br><span class="line">java.runtime.name &#x3D; Java(TM) SE Runtime Environment</span><br><span class="line">java.vm.version &#x3D; 25.151-b12</span><br><span class="line">sun.boot.library.path &#x3D; &#x2F;usr&#x2F;local&#x2F;src&#x2F;jdk1.8.0_151&#x2F;jre&#x2F;lib&#x2F;i386</span><br><span class="line">java.vendor.url &#x3D; http:&#x2F;&#x2F;java.oracle.com&#x2F;</span><br><span class="line">java.vm.vendor &#x3D; Oracle Corporation</span><br><span class="line">path.separator &#x3D; :</span><br><span class="line">file.encoding.pkg &#x3D; sun.io</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="jinfo-flags-pid"><a href="#jinfo-flags-pid" class="headerlink" title="jinfo -flags [pid] "></a><code>jinfo -flags [pid] </code></h3><p>jps -v只能查看显式指定的参数列表，该指令可查看未被显式指定的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">prik@MacBook-Pro blog % jinfo -flags  20743</span><br><span class="line">Attaching to process ID 20743, please wait...</span><br><span class="line">Debugger attached successfully.</span><br><span class="line">Client compiler detected.</span><br><span class="line">JVM version is 25.151-b12</span><br><span class="line">Non-default VM flags: -XX:InitialHeapSize&#x3D;16777216 -XX:MaxHeapSize&#x3D;268435456 -XX:MaxNewSize&#x3D;89456640 -XX:MinHeapDeltaBytes&#x3D;131072 -XX:NewSize&#x3D;5570560 -XX:OldSize&#x3D;11206656 </span><br></pre></td></tr></table></figure>
+
+
+<h2 id="jmap：内存快照工具"><a href="#jmap：内存快照工具" class="headerlink" title="jmap：内存快照工具"></a>jmap：内存快照工具</h2><h3 id="jmap-heap-pid-Java堆详细信息"><a href="#jmap-heap-pid-Java堆详细信息" class="headerlink" title="jmap -heap [pid]  Java堆详细信息"></a><code>jmap -heap [pid]</code>  Java堆详细信息</h3><p>哪种GC，什么参数配置，分代状况等</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">prik@MacBook-Pro blog % jmap -heap 20743</span><br><span class="line">Attaching to process ID 20743, please wait...</span><br><span class="line">Debugger attached successfully.</span><br><span class="line">Client compiler detected.</span><br><span class="line">JVM version is 25.151-b12</span><br><span class="line"></span><br><span class="line">using thread-local object allocation.</span><br><span class="line">Mark Sweep Compact GC</span><br><span class="line"></span><br><span class="line">Heap Configuration:</span><br><span class="line">   MinHeapFreeRatio         &#x3D; 40</span><br><span class="line">   MaxHeapFreeRatio         &#x3D; 70</span><br><span class="line">   MaxHeapSize              &#x3D; 268435456 (256.0MB)</span><br><span class="line">   NewSize                  &#x3D; 5570560 (5.3125MB)</span><br><span class="line">   MaxNewSize               &#x3D; 89456640 (85.3125MB)</span><br><span class="line">   OldSize                  &#x3D; 11206656 (10.6875MB)</span><br><span class="line">   NewRatio                 &#x3D; 2</span><br><span class="line">   SurvivorRatio            &#x3D; 8</span><br><span class="line">   MetaspaceSize            &#x3D; 12582912 (12.0MB)</span><br><span class="line">   CompressedClassSpaceSize &#x3D; 1073741824 (1024.0MB)</span><br><span class="line">   MaxMetaspaceSize         &#x3D; 4294963200 (4095.99609375MB)</span><br><span class="line">   G1HeapRegionSize         &#x3D; 0 (0.0MB)</span><br><span class="line"></span><br><span class="line">Heap Usage:</span><br><span class="line">New Generation (Eden + 1 Survivor Space):</span><br><span class="line">   capacity &#x3D; 5046272 (4.8125MB)</span><br><span class="line">   used     &#x3D; 783568 (0.7472686767578125MB)</span><br><span class="line">   free     &#x3D; 4262704 (4.0652313232421875MB)</span><br><span class="line">   15.527660815746753% used</span><br><span class="line">Eden Space:</span><br><span class="line">   capacity &#x3D; 4521984 (4.3125MB)</span><br><span class="line">   used     &#x3D; 773144 (0.7373275756835938MB)</span><br><span class="line">   free     &#x3D; 3748840 (3.5751724243164062MB)</span><br><span class="line">   17.097451030344203% used</span><br><span class="line">From Space:</span><br><span class="line">   capacity &#x3D; 524288 (0.5MB)</span><br><span class="line">   used     &#x3D; 10424 (0.00994110107421875MB)</span><br><span class="line">   free     &#x3D; 513864 (0.49005889892578125MB)</span><br><span class="line">   1.98822021484375% used</span><br><span class="line">To Space:</span><br><span class="line">   capacity &#x3D; 524288 (0.5MB)</span><br><span class="line">   used     &#x3D; 0 (0.0MB)</span><br><span class="line">   free     &#x3D; 524288 (0.5MB)</span><br><span class="line">   0.0% used</span><br><span class="line">tenured generation:</span><br><span class="line">   capacity &#x3D; 11206656 (10.6875MB)</span><br><span class="line">   used     &#x3D; 4863752 (4.638435363769531MB)</span><br><span class="line">   free     &#x3D; 6342904 (6.049064636230469MB)</span><br><span class="line">   43.40056480720029% used</span><br><span class="line"></span><br><span class="line">6858 interned Strings occupying 480096 bytes.</span><br></pre></td></tr></table></figure>
+
+<h3 id="jmap-dump-format-b-file-xxx-bin-pid"><a href="#jmap-dump-format-b-file-xxx-bin-pid" class="headerlink" title="jmap -dump:format=b,file=xxx.bin [pid] "></a><code>jmap -dump:format=b,file=xxx.bin [pid] </code></h3><p>生成dump文件（当前整个内存的快照），可以用专门的工具来分析查看<br>或使用 jdk 自带的 jhat 查看：<code>jhat xxx.bin </code> 内置了一个 web 服务，可以直接在浏览器中查看</p>
+<h2 id="jstack：线程分析工具"><a href="#jstack：线程分析工具" class="headerlink" title="jstack：线程分析工具"></a>jstack：线程分析工具</h2><p>可以使用 <code>jstack</code> 指令查看线程状况<br><code>-f</code>：强制执行 thread dump，可以在 java 进程卡死时使用。需要系统权限<br><code>-m</code>：混合模式，输出 java 帧和 native 帧，需要系统权限<br><code>-l</code>：常列表模式，输出相关的 locks</p>
+<blockquote>
+<p>作者：prik<br>永久链接： <a href="https://trzoey.github.io/blog-prik/java-notes/Java%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">https://trzoey.github.io/blog-prik/java-notes/Java常用命令/</a><br>转载请注明出处，谢谢合作💓。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog-prik/tags/Java/" rel="tag"># Java</a>
+              <a href="/blog-prik/tags/JVM/" rel="tag"># JVM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog-prik/java-notes/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%8B/" rel="prev" title="深入理解《深入理解Java虚拟机》">
+                  <i class="fa fa-chevron-left"></i> 深入理解《深入理解Java虚拟机》
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog-prik/algorithmic/88.%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84/" rel="next" title="「刷刷刷」88.合并两个有序数组">
+                  「刷刷刷」88.合并两个有序数组 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">prik</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
+<script src="/blog-prik/js/utils.js"></script><script src="/blog-prik/js/motion.js"></script><script src="/blog-prik/js/schemes/muse.js"></script><script src="/blog-prik/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="referrer" content="no-referrer-when-downgrade">
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '19263f2899e033a351c4',
+      clientSecret: '85ce26d420d3c7518e20ce6dee6b6eb412164304',
+      repo        : 'hexo-gittalk',
+      owner       : 'TrZoey',
+      admin       : ['TrZoey'],
+      id          : 'a285917d54691c659c5afee3d530e152',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

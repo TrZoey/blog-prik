@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog-prik/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog-prik/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog-prik/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog-prik/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog-prik/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"trzoey.github.io","root":"/blog-prik/","scheme":"Mist","version":"8.0.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="以问答的形式整理 Redis 相关知识点的学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis学习笔记（基础部分）">
+<meta property="og:url" content="https://trzoey.github.io/blog-prik/java-notes/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%89/index.html">
+<meta property="og:site_name" content="PRIK&#39;s BLOG">
+<meta property="og:description" content="以问答的形式整理 Redis 相关知识点的学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2021/01/07/16100122632143.jpg">
+<meta property="og:image" content="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2021/01/07/16100133362356.jpg">
+<meta property="article:published_time" content="2021-01-07T12:38:19.000Z">
+<meta property="article:modified_time" content="2021-01-07T10:53:04.437Z">
+<meta property="article:author" content="prik">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2021/01/07/16100122632143.jpg">
+
+
+<link rel="canonical" href="https://trzoey.github.io/blog-prik/java-notes/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%89/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Redis学习笔记（基础部分） | PRIK's BLOG</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog-prik/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">PRIK's BLOG</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog-prik/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog-prik/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog-prik/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog-prik/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/blog-prik/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%94%EF%B8%8F-%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E8%A7%88"><span class="nav-text">✔️ 知识点总览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%94%EF%B8%8F-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-amp-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-text">✔️ 数据类型 &amp; 数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Redis%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9F%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F%E4%BB%96%E4%BB%AC%E4%B9%8B%E9%97%B4%E6%98%AF%E5%A6%82%E4%BD%95%E5%AF%B9%E5%BA%94%E7%9A%84%EF%BC%9F"><span class="nav-text">Redis有哪几种数据类型？底层数据结构是怎样的？他们之间是如何对应的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E8%B7%B3%E8%A1%A8%E8%80%8C%E4%B8%8D%E6%98%AF%E7%BA%A2%E9%BB%91%E6%A0%91%EF%BC%9F"><span class="nav-text">有序集合为什么选择跳表而不是红黑树？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E6%95%B0%E7%BB%84%E5%92%8C%E5%8E%8B%E7%BC%A9%E5%88%97%E8%A1%A8%E5%9C%A8%E6%9F%A5%E6%89%BE%E6%93%8D%E4%BD%9C%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8A%E6%B2%A1%E6%9C%89%E5%BE%88%E5%A4%A7%E4%BC%98%E5%8A%BF%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%98%AF%E8%A2%AB-Redis-%E9%80%89%E4%B8%BA%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9F"><span class="nav-text">整数数组和压缩列表在查找操作的时间复杂度上没有很大优势，为什么还是被 Redis 选为底层数据结构？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%B8%90%E8%BF%9B%E5%BC%8Frehash%EF%BC%9F%E8%BF%87%E7%A8%8B%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-text">什么是渐进式rehash？过程是怎样的？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%94%EF%B8%8F-%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="nav-text">✔️ 线程模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Redis%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8%E5%8D%95%E7%BA%BF%E7%A8%8B%EF%BC%9F"><span class="nav-text">Redis为什么用单线程？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Redis%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%A4%9F%E8%BF%99%E4%B9%88%E5%BF%AB%EF%BC%9F"><span class="nav-text">Redis是单线程的为什么能够这么快？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Redis%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-text">Redis的线程模型是什么样的？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%94%EF%B8%8F-%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6"><span class="nav-text">✔️ 持久化机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFAOF%E6%97%A5%E5%BF%97%EF%BC%9F%E5%85%B7%E4%BD%93%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F"><span class="nav-text">什么是AOF日志？具体是如何实现的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AOF-%E6%97%A5%E5%BF%97%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%A4%A7%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF-AOF-%E9%87%8D%E5%86%99%E6%9C%BA%E5%88%B6%EF%BC%9F%E9%87%8D%E5%86%99%E7%9A%84%E8%BF%87%E7%A8%8B%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F%E6%9C%89%E5%93%AA%E4%BA%9B%E5%9C%B0%E6%96%B9%E6%9C%89%E5%8F%AF%E8%83%BD%E4%BC%9A%E9%98%BB%E5%A1%9E%EF%BC%9F"><span class="nav-text">AOF 日志越来越大怎么办？什么是 AOF 重写机制？重写的过程是怎样的？有哪些地方有可能会阻塞？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFRDB%EF%BC%9FRDB%E7%9A%84%E6%9C%BA%E5%88%B6%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-text">什么是RDB？RDB的机制是怎样的？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%94%EF%B8%8F-%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84"><span class="nav-text">✔️ 主从架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Redis%E4%B8%BB%E4%BB%8E%E4%B9%8B%E9%97%B4%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E7%9A%84%EF%BC%9F%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E7%9A%84%E8%BF%87%E7%A8%8B%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-text">Redis主从之间是如何实现数据一致的？数据同步的过程是怎样的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFRedis%E7%9A%84%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6%EF%BC%9F%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-text">什么是Redis的哨兵机制？基本流程是怎样的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B1%E5%93%AA%E4%B8%AA%E5%93%A8%E5%85%B5%E6%9D%A5%E6%89%A7%E8%A1%8C%E4%B8%BB%E4%BB%8E%E5%88%87%E6%8D%A2%E6%98%AF%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E7%9A%84%EF%BC%9F%E5%A6%82%E6%9E%9C%E6%9C%89%E5%93%A8%E5%85%B5%E6%8C%82%E4%BA%86%E8%BF%98%E8%83%BD%E6%89%A7%E8%A1%8C%E4%B8%BB%E4%BB%8E%E5%88%87%E6%8D%A2%E5%90%97%EF%BC%9F"><span class="nav-text">由哪个哨兵来执行主从切换是如何确定的？如果有哨兵挂了还能执行主从切换吗？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9C%94%EF%B8%8F-%E5%88%87%E7%89%87%E9%9B%86%E7%BE%A4"><span class="nav-text">✔️ 切片集群</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E5%AD%98%E5%82%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E9%87%8F%E7%89%B9%E5%88%AB%E5%A4%A7%E7%9A%84%E6%97%B6%E5%80%99%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%87%E7%89%87%E9%9B%86%E7%BE%A4%EF%BC%9F%E5%AE%98%E6%96%B9%E6%8F%90%E4%BE%9B%E7%9A%84-Redis-Cluster-%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F"><span class="nav-text">需要存储的数据量特别大的时候怎么办？什么是切片集群？官方提供的 Redis Cluster 是如何实现的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-Redis-Cluster-%E8%A6%81%E9%87%87%E7%94%A8%E3%80%8C-key-%E2%80%94-gt-%E5%93%88%E5%B8%8C%E6%A7%BD-%E2%80%94-gt-%E5%AE%9E%E4%BE%8B-%E3%80%8D%E7%9A%84%E6%96%B9%E5%BC%8F%EF%BC%9F%E8%80%8C%E4%B8%8D%E6%98%AF%E7%9B%B4%E6%8E%A5%E5%82%A8%E5%AD%98-key-%E5%92%8C%E5%AE%9E%E4%BE%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB%EF%BC%9F"><span class="nav-text">为什么 Redis Cluster 要采用「 key —&gt; 哈希槽 —&gt; 实例 」的方式？而不是直接储存 key 和实例之间的映射关系？</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="prik"
+      src="/blog-prik/images/logo_white.png">
+  <p class="site-author-name" itemprop="name">prik</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog-prik/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog-prik/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog-prik/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/TrZoey" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;TrZoey" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xushiwei7066@foxmail.com" title="E-Mail → mailto:xushiwei7066@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/blog-prik/about/" title="Wechat → &#x2F;about&#x2F;"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://trzoey.github.io/blog-prik/java-notes/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog-prik/images/logo_white.png">
+      <meta itemprop="name" content="prik">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PRIK's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis学习笔记（基础部分）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-01-07 20:38:19 / 修改时间：18:53:04" itemprop="dateCreated datePublished" datetime="2021-01-07T20:38:19+08:00">2021-01-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog-prik/categories/Java%E5%A4%A7%E4%B9%B1%E7%82%96/" itemprop="url" rel="index"><span itemprop="name">Java大乱炖</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-user"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">以问答的形式整理 Redis 相关知识点的学习笔记</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>本文为专栏 <a target="_blank" rel="noopener" href="https://time.geekbang.org/column/intro/329">Redis核心技术与实战 - 蒋德钧 - 极客时间</a> 的学习笔记。另外，在此还要感谢评论区大神、课代表 Kaito 同学的分享与帮助。</p>
+</blockquote>
+<h3 id="✔️-知识点总览"><a href="#✔️-知识点总览" class="headerlink" title="✔️ 知识点总览"></a>✔️ 知识点总览</h3><p>首先我们都知道 Redis 是一个非常经典的，高性能的，“单线程”的键值数据库。</p>
+<p>为什么高性能呢？除了 Redis 是基于内存的数据库之外，还要归功于它的<strong>底层数据结构</strong>。高效的数据结构是Redis快速处理数据的基础。</p>
+<p>除了数据结构以外，为什么Redis是“单线程”的，却还能够那么快？那我们就需要了解 Redis 的<strong>线程模型</strong>到底是怎样的。</p>
+<p>对于一款数据库来说，光够快是不够的，还需要够强壮，也就是常说的高可用。</p>
+<p>对于 Redis 的高可用来说，基于内存的数据库有一个致命问题：一旦发生宕机，内存中的数据将会全部丢失。如果单纯地从后端数据库恢复数据，是非常耗费性能且耗时的。所以持<strong>久化机制</strong>对于 Redis 来说是十分必要的。而我们知道，读写磁盘是非常耗时的操作，那么 Redis 是如何在保证高性能的前提下实现持久化机制的呢？这就需要来了解一下 <strong>AOF</strong> 和 <strong>RDB</strong> 了。</p>
+<p>高可用不止包括宕机后的数据恢复，还包括服务尽量少的中断。Redis 采用了<strong>主从库读写分离</strong>的模式，具体是如何实现的呢？数据如何同步？又是如何保证主从数据一致的呢？同时还要兼顾到在此过程中尽量不要让主库中断对外提供服务。这就需要了解 Redis 的<strong>主从架构</strong>了。</p>
+<p>那么这又带来了新的问题：主库挂了怎么办？如果主库挂了我们肯定需要一个新的主库，比如把某一个从库切换为主库。那么需要考虑的问题是：如何判断主库真的挂了？如果切换的话应该选哪个从库作为新主库？切换完成后如何将新主库的信息通知给从库和客户端呢？</p>
+<p>Redis 通过<strong>哨兵机制</strong>实现了主从库自动切换功能，高效解决了主动复制模式下故障转移的问题。</p>
+<p>了解哨兵机制后，新的问题又又又来了：该由哪个哨兵执行主从切换？如果哨兵挂了还能执行主从切换吗？</p>
+<p>达到了够快，够强之后，最后还要看够不够装。如果需要存储的数据量非常庞大怎么办？我们需要了解什么是<strong>切片集群</strong>以及它的实现方案。</p>
+<p>至此，就对 Redis 相关的基础知识点有了一个全局的大体上的了解，然后针对每个点再进行深挖。</p>
+<h3 id="✔️-数据类型-amp-数据结构"><a href="#✔️-数据类型-amp-数据结构" class="headerlink" title="✔️ 数据类型 &amp; 数据结构"></a>✔️ 数据类型 &amp; 数据结构</h3><h4 id="Redis有哪几种数据类型？底层数据结构是怎样的？他们之间是如何对应的？"><a href="#Redis有哪几种数据类型？底层数据结构是怎样的？他们之间是如何对应的？" class="headerlink" title="Redis有哪几种数据类型？底层数据结构是怎样的？他们之间是如何对应的？"></a>Redis有哪几种数据类型？底层数据结构是怎样的？他们之间是如何对应的？</h4><p>Redis 中的所有数据都是以键值对的形式保存在全局哈希表中，每个键值对的值又对应了多种数据类型，借用专栏中的一张图：</p>
+<p><img data-src="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2021/01/07/16100122632143.jpg"></p>
+<h4 id="有序集合为什么选择跳表而不是红黑树？"><a href="#有序集合为什么选择跳表而不是红黑树？" class="headerlink" title="有序集合为什么选择跳表而不是红黑树？"></a>有序集合为什么选择跳表而不是红黑树？</h4><p>有序集合选择跳表而没有选择红黑树，是因为虽然插入删除查找时间复杂度相同，但是根据区间查找这个操作红黑树没有跳表效率高。</p>
+<blockquote>
+<p>关于跳表这种数据结构，再次推荐 <a target="_blank" rel="noopener" href="https://time.geekbang.org/column/intro/126">数据结构与算法之美 - 王争 - 极客时间</a> 专栏，里边有非常好的讲解。</p>
+</blockquote>
+<h4 id="整数数组和压缩列表在查找操作的时间复杂度上没有很大优势，为什么还是被-Redis-选为底层数据结构？"><a href="#整数数组和压缩列表在查找操作的时间复杂度上没有很大优势，为什么还是被-Redis-选为底层数据结构？" class="headerlink" title="整数数组和压缩列表在查找操作的时间复杂度上没有很大优势，为什么还是被 Redis 选为底层数据结构？"></a>整数数组和压缩列表在查找操作的时间复杂度上没有很大优势，为什么还是被 Redis 选为底层数据结构？</h4><p>一是因为Redis是内存数据库，需要尽量优化内存，提高内存利用率。数组和压缩列表是非常紧凑的数据结构，比链表占用的内存要少。</p>
+<p>二是因为数组对CPU高速缓存支持更友好（空间局部性：访问数组时会将访问元素附近的多个元素一起带到高速缓存中）。所以当集合数据元素比较少时，默认采用内存紧凑排列的方式存储，同时能够利用CPU高速缓存，不会降低访问速度。当元素数量超过阈值之后，避免查询时间复杂度太高，保证查询效率，转为哈希或者跳表结构。</p>
+<h4 id="什么是渐进式rehash？过程是怎样的？"><a href="#什么是渐进式rehash？过程是怎样的？" class="headerlink" title="什么是渐进式rehash？过程是怎样的？"></a>什么是渐进式rehash？过程是怎样的？</h4><p>当全局哈希表内数据越来越多，某些冲突链会过长，查询效率降低。所以 Redis 会进行 rehash 操作：增加哈希桶数量，减少单个桶中的元素。</p>
+<p>为了让 rehash 操作更加高效，Redis 默认使用两个全局哈希表，每次只使用其中一个。当元素数量达到阈值，便进行 rehash 操作：给另一个哈希表分配更大的内存空间，将正在使用的哈希表数据 copy 过去，释放旧的哈希表空间。</p>
+<p>但是这个过程涉及大量数据拷贝，一次性迁移会导致线程阻塞。为了避免采取了渐进式 rehash 的操作：分配更大的新的空间之后，Redis 仍然正常处理请求，每处理一个请求，会将旧哈希表中第一个索引位置的所有元素copy 到新哈希表中。下一个请求时再 copy 一份。这样将一次性的大量拷贝分摊到了多个请求处理过程中，避免了线程阻塞。</p>
+<h3 id="✔️-线程模型"><a href="#✔️-线程模型" class="headerlink" title="✔️ 线程模型"></a>✔️ 线程模型</h3><p>Redis为什么用单线程？Redis是单线程的为什么能够这么快？Redis的线程模型是什么样的？</p>
+<h4 id="Redis为什么用单线程？"><a href="#Redis为什么用单线程？" class="headerlink" title="Redis为什么用单线程？"></a>Redis为什么用单线程？</h4><p>当我们编写多线程程序，在刚开始增加线程数时，系统的吞吐率会上升。但增加到一定程度之后，吞吐量的提升会趋于平缓，甚至下降。这是因为多线程模式需要处理共享资源的并发访问控制，另外多个线程的切换也会消耗一定的资源。还有多线程也会提升系统的复杂度，增加开发难度，降低可维护性。最后就是 Redis 服务中运行的绝大多数操作的性能瓶颈都不是CPU，使用多线程的意义不大。</p>
+<h4 id="Redis是单线程的为什么能够这么快？"><a href="#Redis是单线程的为什么能够这么快？" class="headerlink" title="Redis是单线程的为什么能够这么快？"></a>Redis是单线程的为什么能够这么快？</h4><p>首先Redis采用了高效的数据结构，这是它高性能的一个重要原因。另一个原因就是 Redis 的线程模型：<strong>单线程下的多路复用机制</strong>。其实是基于 reactor 模型的单 reactor 单线程模式。要注意 Redis 并不是完全单线程的，但主要的网络 IO 和键值对读写是由一个线程完成的，也是对外服务的主要流程，所以常说 Redis 是单线程的。其他功能比如持久化、异步删除、集群数据同步等都是其他额外线程完成的。</p>
+<h4 id="Redis的线程模型是什么样的？"><a href="#Redis的线程模型是什么样的？" class="headerlink" title="Redis的线程模型是什么样的？"></a>Redis的线程模型是什么样的？</h4><p>Redis 单线程模型主要是文件事件处理器，包括4个部分：</p>
+<ol>
+<li>多个 socket</li>
+<li>IO 多路复用程序</li>
+<li>文件事件分派器</li>
+<li>事件处理器（连接应答处理器、命令请求处理器、命令回复处理器）</li>
+</ol>
+<p>客户端与服务端的一次通信过程是这样的：</p>
+<p>Redis 初始化时，会将 server socket 的 AE_READABLE 事件与连接应答处理器关联。</p>
+<p>客户端 socket 向 Redis 请求连接，server socket 会产生一个 AE_READABLE 事件，IO 多路复用程序监听到之后，将 socket 压入队列，文件事件分派器从队列中获取 socket ，交给连接应答处理器。连接应答处理器创建一个能与客户端通信的 socket01 ，并将 AE_READABLE 事件与命令请求处理器关联。</p>
+<p>假设客户端发送一个 set 请求，Redis 中的 socket01 会产生 AE<br>_READABLE 事件，IO 多路复用程序将 socket01 压入队列，事件分派器获取到 socket01 之后，因为事件已经关联了命令请求处理器，所以会交给命令请求处理器来处理。命令请求处理器完成写入操作，将 socket01 的AE_WRITABLE 事件与命令回复处理器关联。<br>客户端如果准备好接受返回结果了，Redis 的 socket01 会产生一个 AE_WRITABLE 事件，压入队列中，事件分派器找到关联命令的命令回复处理器，由命令回复处理器对 socket01 输入本次操作的结果（比如 ok ），解除socket01 的 AE_WRITABLE 事件与命令回复处理器的关联。这样就完成了一次通信。</p>
+<p>对照下图来看，注意 server socket 其实应该有多个，不要被误导。实在不好意思忘记图出自哪里了，侵删。</p>
+<p><img data-src="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2021/01/07/16100133362356.jpg"></p>
+<blockquote>
+<p>注意 Redis 6.0 引入了多线程，具体后边再说。</p>
+</blockquote>
+<h3 id="✔️-持久化机制"><a href="#✔️-持久化机制" class="headerlink" title="✔️ 持久化机制"></a>✔️ 持久化机制</h3><h4 id="什么是AOF日志？具体是如何实现的？"><a href="#什么是AOF日志？具体是如何实现的？" class="headerlink" title="什么是AOF日志？具体是如何实现的？"></a>什么是AOF日志？具体是如何实现的？</h4><p>不同于一般数据库的写前日志（WAL），AOF 是一种写后日志。AOF 日志是以文本的形式保存下来了 Redis 收到的每一条命令，先写入内存中的缓冲区，然后再择机落入磁盘。由于是命令执行成功后再记录日志，所以记录日志时不再需要对命令进行语法检查，记录日志的过程也不会阻塞当前的写操作。</p>
+<p>但同时也带来了两个问题：一个是如果刚执行完命令还没有写 AOF 日志就宕机了，这时就有数据丢失的问题。另一个是虽然向磁盘写日志不阻塞当前操作，但有可能会阻塞后续操作，因为 AOF 也是在主线程中执行的，而将数据写入磁盘这个操作是一个相对很慢的操作。</p>
+<p>我们可以通过配置有取舍地解决这两个问题。AOF的配置 <code>appendfysnc</code> 有三个值可选：</p>
+<ol>
+<li><code>Always</code>：同步写回。每个命令执行完，立刻将AOF日志写到磁盘。</li>
+<li><code>Evertsec</code>：每秒写回。每个命令执行完，先讲AOF日志写到AOF内存缓冲区中，然后每隔一秒将缓冲区中的所有内容写入磁盘。</li>
+<li><code>No</code>：由操作系统控制何时将缓冲区内容写回磁盘。</li>
+</ol>
+<p>这三种方案都无法做到既兼顾高性能，又兼顾高可靠性。第一种可靠性最高，数据丢失概率非常小，但性能最差。第二种性能适中，宕机最多丢失 1 秒内的数据。第三种性能最好，但宕机时丢失的数据也更多。</p>
+<h4 id="AOF-日志越来越大怎么办？什么是-AOF-重写机制？重写的过程是怎样的？有哪些地方有可能会阻塞？"><a href="#AOF-日志越来越大怎么办？什么是-AOF-重写机制？重写的过程是怎样的？有哪些地方有可能会阻塞？" class="headerlink" title="AOF 日志越来越大怎么办？什么是 AOF 重写机制？重写的过程是怎样的？有哪些地方有可能会阻塞？"></a>AOF 日志越来越大怎么办？什么是 AOF 重写机制？重写的过程是怎样的？有哪些地方有可能会阻塞？</h4><p>AOF 不断地往里追加内容，会变得越来越大。文件过大有可能系统有限制，无法保存。添加新的内容时效率也会更低。而且发生宕机后恢复数据需要一条一条执行非常多的命令，过程会变得很慢。这就需要 AOF 重写机制了。</p>
+<p>AOF 重写就是以当前数据库的所有键值对为准，重新创建一个新的 AOF 日志，里边记录了所有键值对的写入命令。这样旧的 AOF 日志中对于一个键有可能有很多条命令，重写后就变为一条了。</p>
+<p>Redis 为了保证高性能，重写时当然不会让主线程阻塞。重写过程可以总结为<strong>“一个拷贝，两处日志”</strong>。</p>
+<p>重写时会由主线程 fork 出一个后台的子进程，fork 会拷贝一份主线程的内存给子进程。此时主线程不会阻塞，仍然继续处理新的操作，新的命令仍然会存在旧的AOF日志中。同时这些新的指令也会存在 AOF 重写缓冲区中。等子进程对拷贝的所有数据都重写完成之后，AOF 重写缓冲区中的内容也会写入新的 AOF 日志，完成之后就可以用新的 AOF 替代旧的了。</p>
+<p>这里需要注意的是，Redis 为了避免一次性拷贝大量的数据，采用了 Copy On Write 机制。fork 时复制给子进程的实际上是内存页表（虚拟内存和物理内存的映射索引表），而不是实际内存数据。此时主进程和子进程共享内存中的数据。当主进程某个 key 有新数据写入时，会分配一块新的内存，将数据写入新的内存。这样主进程和子进程的数据就会逐渐分离。这里需要注意，Copy On Write 的粒度是内存页，也就是说主进程分配到一块新的内存之后，要把当前写入数据所在的内存页一起全部 copy 过去。</p>
+<p>在这个过程中，有两个有可能会阻塞的点需要注意：fork 时复制内存页表这个过程会消耗大量  CPU 资源，拷贝时是会阻塞进程的，阻塞时间取决于整个实例的内存大小。另外，Copy On Write 时，复制的粒度是内存页，默认一页的大小是 4kb。如果复制的 key 是一个 bigkey，那么重新申请大块内存并复制也是一个耗时比较长的过程。</p>
+<p>还有如果系统开启了内存大页机制（Huge Page，内存页大小为 2M ），那么主进程申请内存后复制时阻塞的时间会大大增长。所以使用 Redis 时建议关闭系统 huge page 功能。（Huge Page 特性主要是为了提高 TLB 命中率，相同的内存大小下，Huge Page 可以减少页表项，TLB就可以缓存更多的页表项，能减少 TLB miss 导致的开销）</p>
+<p>其实在很多丢失数据不敏感的业务场景，一般是不需要开启 AOF 的。</p>
+<h4 id="什么是RDB？RDB的机制是怎样的？"><a href="#什么是RDB？RDB的机制是怎样的？" class="headerlink" title="什么是RDB？RDB的机制是怎样的？"></a>什么是RDB？RDB的机制是怎样的？</h4><p>RDB，即内存快照。Redis 持久化的另一种方案，配合 AOF 使用口感更佳。</p>
+<p>如果只是用 AOF 来做持久化，当数据量很大，操作记录很多的时候，如果要做故障恢复，需要一条一条执行很多命令，效率低下。需要 RDB 来配合处理。</p>
+<p>生成 RDB 文件就是将某一时刻Redis中的所有数据以文件的形式写在磁盘上，如果宕机后恢复数据，只需要直接读入内存即可，相比 AOF 效率很高。</p>
+<p>Redis提 供了两个指令来生成 RDB 文件：</p>
+<ol>
+<li><code>save</code>：主线程中执行，会导致阻塞</li>
+<li><code>bgsave</code>：创建一个子进程，专门用于写入 RDB 文件，默认配置。</li>
+</ol>
+<p>bgsave 命令创建 RDB 文件的过程与 AOF 重写类似，同样借助 COW 技术。从主线程 fork 出子进程（拷贝内存页表），与主线程共享内存数据。当主线程有写操作发生时，复制对应的内存页。</p>
+<p>要注意，RDB 文件不宜频繁生成。一方面会给磁盘带来非常大压力，而且有可能出现一次 RDB 还没有写完，后一次就已经开始了，从而陷入恶性循环。另一方面 fork 的过程是会阻塞主线程的，也会影响性能。</p>
+<p>还有就是可以采用增量快照的方式避免多次全量快照的开销：在一次全量快照之后，记录下哪些数据被修改了，之后生成 RDB 只对修改的数据进行记录。但这会带来另一个问题：记录修改操作会额外耗费很多的内存，Redis 的内存是很宝贵的资源。</p>
+<p>所以说如果只是用 RDB 的方式做数据持久化，无法确定一个很好的快照频率。如果频率太高影响性能，如果频率太低，宕机发生的话会丢失大量数据。所以一般的用法是 RDB 结合 AOF 同时使用。</p>
+<p>以一定频率执行 RDB，在两次 RDB 之间，使用 AOF 日志记录。等到第二次 RDB 的时候，中间的 AOF 就可以清空了。恢复数据时首先使用 RDB 文件恢复大部分数据，然后在使用 AOF 恢复剩余的部分数据，这样就基本达到了鱼和熊掌兼得的目的。</p>
+<p>对于 RDB 的频率，Redis 默认的配置是：<br>满足下边这三种任一种情况，都会执行 <code>bgsave</code> 命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">save 900 1 &#x2F;&#x2F; 900 秒内，对数据库至少修改 1 次。下面同理</span><br><span class="line">save 300 10</span><br><span class="line">save 60 10000</span><br></pre></td></tr></table></figure>
+<p>Redis 4.0 之后，AOF 重写时，就是将内存数据以 RDB 的格式写入 AOF 文件的开头。但带来的问题是 RDB 格式的数据可读性很差。</p>
+<h3 id="✔️-主从架构"><a href="#✔️-主从架构" class="headerlink" title="✔️ 主从架构"></a>✔️ 主从架构</h3><p>对于高可靠性，RDB 和 AOF 保证了数据尽量不丢失，而服务尽量少中断需要主从架构来保证。Redis 的主从库模式采用的是读写分离的方式。主从库都可以读，但写只能是主库，再由主库同步给从库。</p>
+<h4 id="Redis主从之间是如何实现数据一致的？数据同步的过程是怎样的？"><a href="#Redis主从之间是如何实现数据一致的？数据同步的过程是怎样的？" class="headerlink" title="Redis主从之间是如何实现数据一致的？数据同步的过程是怎样的？"></a>Redis主从之间是如何实现数据一致的？数据同步的过程是怎样的？</h4><p>在主从库第一次同步时，需要进行一次全量复制。从库和主库建立连接，并告诉主库即将进行同步。主库确认回复后，即可开始同步。</p>
+<p>从库需要向主库发送 <code>psync</code> 命令：<code>psync runID offset</code>。runID 是每个 Redis 实例都会自动生成的一个随机唯一 ID，用来标记示例。offset 是复制的偏移量。第一次复制时，runID 未知，传 ？ 。offset 传 -1。<br>主库收到后会返回自己的 runID，和目前主库的复制进度 offset。</p>
+<p>首次复制主库会将全部数据发送给从库，这个过程依赖于 RDB。也就是生成一份 RDB 文件发送给从库，从库会先清空数据库之后，将数据读入内存。在复制的同时，主库也会正常提供服务，并将新的写操作缓存在 replication buffer 中。最后，当 RDB 文件发送完成后，主库把 replication buffer 中的数据发送给从库，从库重新执行这些操作，同步就完成了。</p>
+<p>完成了首次全量复制之后，主从之间会维护一个长连接，主库会将后续收到的所有命令通过链接同步给从库。<br>这里需要注意，如果有很多从节点挂在主节点上，主节点要和所有从库进行全量复制的话，会给主库带来极大的压力。一般会采用 主-从-从 模式，让更多的从节点挂在其他从节点上，这样可以分摊主库的压力。</p>
+<p>还需要考虑的地方是，网络连接阻塞甚至断开了怎么办？Redis 2.8 以前一旦主从节点网络断开，从库会重新进行一次全量复制，这个开销是非常大的。2.8 以后从库开始进行增量复制。具体是利用到了 repl_backlog_buffer 缓冲区。</p>
+<p>repl_backlog_buffer 是一个环形缓冲区，每有一个从库挂到主库，都会分配一块出来。主库除了将所有命令同步给从库之外，也会在这个缓冲区中记录一份。当从库断开连接重连之后，重新发送命令到主库，主库根据 offset 在 repl_backlog_buffer 中找到断开的位置，将之后的命令发送给从库即可。由于 repl_backlog_buffer 是环形的，所以如果主从断开太久，新的缓存会把旧的缓存覆盖掉，这之后从库再连回来（或者网络延迟、从库执行缓慢导致），那就不得不再重新进行一次全量复制了。<br>所以要控制好 repl_backlog_size 这个参数的大小。一般粗略计算为：repl_backlog_size = 主库写入命令速度 * 命令大小 - 主从库命令传输速度 * 命令大小。考虑到一些突发的请求压力，一般还会再在结果上乘2。如果并发峰值特别大，那么还可以设置为更大，或者考虑使用切片机群来分担主库请求压力。后边再说。</p>
+<p>注意区分 replication buffer 和 repl_backlog_buffer。</p>
+<p>前者是 Redis 服务端与客户端通信时，用来交互数据的缓存。每个客户端连接都会分配一块 buffer 出来。Redis 先把数据写入这个 buffer，然后将 buffer 中的数据发到 client socket 中通过网络发送出去。从库也是一个 client，也是一样的，专门用来将用户的写命令从主库传到从库。Redis 提供了 client-output-buffer-limit 参数限制这个 buffer 的大小，如果超过限制，主库会强制断开从库的连接。如果不限制，从库处理请求的速度又很慢的话，这个 buffer 会无限膨胀，最终导致 OOM。</p>
+<p>而后者是为了主从同步设计的，避免一旦断开就要进行全量复制的性能开销。这个 buffer 只用来对比主从数据差异，真正信息传递还是要靠 replication buffer。</p>
+<h4 id="什么是Redis的哨兵机制？基本流程是怎样的？"><a href="#什么是Redis的哨兵机制？基本流程是怎样的？" class="headerlink" title="什么是Redis的哨兵机制？基本流程是怎样的？"></a>什么是Redis的哨兵机制？基本流程是怎样的？</h4><p>哨兵机制实现了Redis主从集群故障转移的功能，如果主库挂掉，可以自动执行主从切换。</p>
+<p>哨兵机制主要解决主从切换的三个问题：</p>
+<ol>
+<li>如何判断主库真的挂掉了？（监控）</li>
+<li>选择哪个从库作为主库？（选主）</li>
+<li>如何把新主库的信息通知到从库和客户端？（通知）</li>
+</ol>
+<p><strong>哨兵机制的流程：</strong></p>
+<p>哨兵进程在运行时，会周期性地给所有主从库发送 PING 命令，监测他们是否正常运行。如果一个节点没有在规定的时间内响应哨兵，则会被标记为“主观下线”。</p>
+<p>如果是从节点，下线影响不大，标记完就好了。如果是主节点，不能直接开始主从切换。因为有可能存在误判，比如网络堵塞或是主库压力比较大。主从切换的开销很大，必须要避免不必要的开销。</p>
+<p>哨兵一般也会集群部署，所以需要有超过一半的哨兵都认为主库“主观下线”，主库才会被标记为“客观下线”。这时才会触发主从切换流程。</p>
+<p>哨兵通过筛选加打分来选择新的主库。</p>
+<p>如果从库总是和主库断连，则说明这个从库网络状况不好，不适合做主库。这样的节点会被筛选掉。</p>
+<p>剩下的节点中会进行三轮打分。</p>
+<p>第一轮优先级最高的从库得分高。我们可以通过配置，给从库不同的优先级。人为给一个性能最好的机器上的从库优先级设为最高，那么主从切换时就会选这个从库作为主库。</p>
+<p>第二轮判断从库和旧主库的同步程度，越接近的得分越高。这里是通过主从同步的 repl_backlog_buffer 中的 offset 对比判断。</p>
+<p>如果还相等，就进行第三轮判断，ID号小的从库得分高。</p>
+<p>选出新的主库之后，哨兵会把新主库的连接信息发送给其他从库，让他们执行 replicaof 命令，和新主库建立连接，并进行数据同步。同时哨兵也会通知客户端，让客户端将请求操作发送到新的主库节点。</p>
+<p>需要注意的是，在主从切换期间，如果是读写分离的，那么读请求可以在从库正常执行。但主库挂掉，而且还没有新主库产生时，写请求会失败。如果不想让客户端感知到主从切换，需要客户端将写请求写入消息队列中，待主从切换完成后再从消息队列中拉取指令执行。</p>
+<p>客户端与哨兵之间通过广播的方式同步主从节点信息。哨兵会向客户端广播主库地址。客户端也可以主动向哨兵获取，一般的SDK都封装了相应功能。</p>
+<p>哨兵集群之间的通信是通过 Redis 的 pub/sub 机制进行的。哨兵只要和主库建立了连接，就会在主库的一个固定主题 <strong>sentinel</strong>:hello 下发布自己的ip和端口等信息。所有的哨兵都会通过对这个主题的订阅和发布来发现其他哨兵。发现之后他们会彼此之间建立网络连接来通信。</p>
+<p>哨兵还需要连接从库来进行监控。这是通过向主库发送 INFO 命令来完成的。主库接收到 INFO 命令之后，会将从库列表发送给哨兵。</p>
+<p>哨兵还需要连接客户端，向客户端广播监控、选主、切换等各个过程中发生的事件。这也是通过 pub/sub 机制完成的。哨兵提供了多个消息主题，不同主题包含了不同的关键事件。比如主库主观上/下线，客观上/下线，主从切换等。</p>
+<h4 id="由哪个哨兵来执行主从切换是如何确定的？如果有哨兵挂了还能执行主从切换吗？"><a href="#由哪个哨兵来执行主从切换是如何确定的？如果有哨兵挂了还能执行主从切换吗？" class="headerlink" title="由哪个哨兵来执行主从切换是如何确定的？如果有哨兵挂了还能执行主从切换吗？"></a>由哪个哨兵来执行主从切换是如何确定的？如果有哨兵挂了还能执行主从切换吗？</h4><p>哨兵会通过选举机制来选出执行主从切换的哨兵。结合判断主库下线的流程一起来看：</p>
+<p>当任何一个哨兵发现主库主观下线后，就会向其他哨兵发送消息，让他们立刻确认主库状态。其他哨兵如果发现主库也主观下线下，返回 Y，否则返回 N。当一个哨兵获得了大于等于配置项中的 quorum 给定的数量的赞成票时（包括自己的一张赞成票），该哨兵标记主库为客观下线。</p>
+<p>此时该哨兵会向其他哨兵发送一条消息来发起投票，表示希望由自己来执行主从切换（相当于投资及一票）。最终成为 Leader 去执行主从切换的哨兵需要达成两个条件：获得超过半数以上的赞成票并且赞成票数量要大于等于 quorum。（3 个哨兵，quorum=2，那么就需要 2 票来当选）。</p>
+<p>在一轮投票中，每个哨兵只能投一票。当一个哨兵收到了其他哨兵的发起投票消息时，会投票给最先收到本轮投票消息的那个哨兵。或者自己本身已经判断主库客观下线，也发起了选举投票，那么他已经投票给自己了，就不能再投票给别的哨兵了。</p>
+<p>如果在一轮投票中，没有诞生 Leader，哨兵集群会等待一段时间之后，重新进行选举。如果诞生了 Leader，就由 Leader 哨兵来执行主从切换。</p>
+<p>需要注意：如果哨兵集群只有 2 个实例，一个哨兵想要成为 Leader，必须获得 2 票赞成，此时的哨兵集群无法选举出 Leader，无法执行主从切换。所以通常至少要配置 3 个哨兵。</p>
+<h3 id="✔️-切片集群"><a href="#✔️-切片集群" class="headerlink" title="✔️ 切片集群"></a>✔️ 切片集群</h3><h4 id="需要存储的数据量特别大的时候怎么办？什么是切片集群？官方提供的-Redis-Cluster-是如何实现的？"><a href="#需要存储的数据量特别大的时候怎么办？什么是切片集群？官方提供的-Redis-Cluster-是如何实现的？" class="headerlink" title="需要存储的数据量特别大的时候怎么办？什么是切片集群？官方提供的 Redis Cluster 是如何实现的？"></a>需要存储的数据量特别大的时候怎么办？什么是切片集群？官方提供的 Redis Cluster 是如何实现的？</h4><p>比较容易想到的方案是：纵向扩展。也就是说升级单个 Redis 实例的资源配置，如增加内存容量、磁盘容量，使用更高配置的 CPU。但这个方案面临两个难点：一是会收到硬件和成本的限制。内存越高，升级时成本越大。二是之前提到的，RDB 持久化时，fork 子进程的操作的耗时，是和数据量成正比的，特别大的数据量会导致 fork 时阻塞主线程的时间变长。但纵向扩展的优点也很明显，那就是实现简单直接。</p>
+<p>那么有没有更好的解决方案呢？有，那就是横向扩展，也就是 Redis 切片集群：横向增加 Redis 实例的数量，将数据均匀存放在多个实例上。那么就带来了两个问题：数据切片后，在多个实例之间如何分布？客户端如何找到想要的数据在哪个实例上？</p>
+<p>Redis 3.0 开始提供了 Redis Cluster 方案实现切片集群。采用哈希槽来处理数据与实例的映射关系。一个切片集群一共有 16384 个哈希槽，每个键值对都会根据它的 key 映射到一个哈希槽中：首先根据 key，按照 CRC16 算法计算得到一个 16bit 的值，然后再用这个值对 16384 取模，得到的就是在哈希槽中的位置。当我们使用 <code>cluster create</code> 命令创建集群时，Redis 会自动将 16384 个槽位平均分配到所有实例上。当然也可以手动指定每个实例上的槽位的数量。（注意手动分配时，必须将 16384 个槽位全部分配完，否则集群无法正常工作）。</p>
+<p>那么客户端在访问集群时，计算出了需要的数据在哪个哈希槽之后，如何确定哈希槽在哪个实例上呢？Redis 实例会把自己的哈希槽信息发给和他相连接的其他实例，完成哈希槽分配信息的扩散，集群中的每个实例都会有所有哈希槽和实例的映射关系了。客户端会将收到的映射信息缓存在本地，当请求时，就可以根据哈希值找到哈希槽再找到实例了。</p>
+<p>但是集群中的实例是会有新增和删除的，当新增或删除发生时，为了负载均衡，Redis 会将哈希槽在所有实例上重新分配一遍。这样哈希槽的映射关系就改变了，这时客户端又该怎么办呢？Redis Cluster 方案提供了一种重定向机制。如果客户端向一个实例发送了读写请求，但是该实例上并没有这个键值对对应的哈希槽，他会返回 MOVED 命令相应结果，其中包含了正确的实例的访问地址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET hello:key</span><br><span class="line">(error) MOVED 13320 172.16.19.5:6379</span><br></pre></td></tr></table></figure>
+<p>还有另一种情况，因为一个哈希槽中会分布多个键值对，那么就会有访问的哈希槽正在迁移中，一个部分已经到了新的实例上，一部分还在原实例上。这时如果客户端发送读写请求，如果旧实例上有要找的数据，那就正常执行指令。如果没有，会返回 ASK 命令给客户端，其中也携带了新的实例的地址。客户端收到后会向新实例发送 ASKING 命令请求。也就是说 ASK 命令表示槽位正在迁移中，我这里没有说明可能已经迁移到新的地址了，你去新的地址找找看。不会想 MOVED 命令更新客户端缓存的哈希槽映射信息，这样就避免了迁移中的数据找不到的情况发生。</p>
+<h4 id="为什么-Redis-Cluster-要采用「-key-—-gt-哈希槽-—-gt-实例-」的方式？而不是直接储存-key-和实例之间的映射关系？"><a href="#为什么-Redis-Cluster-要采用「-key-—-gt-哈希槽-—-gt-实例-」的方式？而不是直接储存-key-和实例之间的映射关系？" class="headerlink" title="为什么 Redis Cluster 要采用「 key —&gt; 哈希槽 —&gt; 实例 」的方式？而不是直接储存 key 和实例之间的映射关系？"></a>为什么 Redis Cluster 要采用「 key —&gt; 哈希槽 —&gt; 实例 」的方式？而不是直接储存 key 和实例之间的映射关系？</h4><p>主要有以下几点原因：</p>
+<ol>
+<li>整个集群的 key 的总量是无法估量的，如果直接记录 key 和实例的映射关系，当 key 特别多时，这个映射表会非常庞大，无论存储在服务端还是客户端都要占用大量的存储空间。而 Redis Cluster 方案中的哈希槽的总数是固定的，不会过度膨胀。</li>
+<li>Redis Cluster 采用的是无中心化的模式，客户端向某个节点访问一个 key，如果这个节点没有这个 key，需要有帮客户端纠正错误，路由到正确节点上的能力（MOVED/ASK）。这就需要每个节点都拥有完整的哈希槽映射关系，节点之间需要交换这些信息。如果存储的是 key 和实例的映射，节点之间交换信息的量会非常大，大量消耗网络资源。</li>
+<li>当集群中实例增加/减少，以及均衡数据的时候，节点之间要发生数据迁移，这会需要修改每个 key 与节点的映射关系，维护成本非常高。</li>
+<li>在 key 与实例之间增加一个中间层哈希槽，相当于将数据和节点解耦。key 通过哈希计算，只关系对应哪个哈希槽。只消耗了很少的 CPU 资源，让数据分配的更均匀，而且还让映射关系的存储占用空间变得很小，有利于客户端和服务端的存储，节点交换信息也更加轻量。</li>
+<li>当集群实例增加减少，数据均衡时，只需要以哈希槽为单位进行操作，简化了集群维护和管理的难度。</li>
+</ol>
+<p>补充一点：哈希槽其实本质上就是一致性哈希 —— 有 16384 个槽位的哈希环。但相比直接的一致性哈希，哈希槽的方式多了一个中间层，也就是槽位，达到了解耦的目的，更方便数据迁移，降低维护难度。</p>
+<blockquote>
+<p>作者：prik<br>永久链接： <a href="https://trzoey.github.io/blog-prik/java-notes/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%89/">https://trzoey.github.io/blog-prik/java-notes/Redis学习笔记（基础部分）/</a><br>转载请注明出处，谢谢合作💓。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog-prik/tags/Redis/" rel="tag"># Redis</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog-prik/algorithmic/169.%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0/" rel="prev" title="「刷刷刷」169.多数元素">
+                  <i class="fa fa-chevron-left"></i> 「刷刷刷」169.多数元素
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog-prik/algorithmic/%E6%88%91%E7%9A%84%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" rel="next" title="我的算法学习记录">
+                  我的算法学习记录 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">prik</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
+<script src="/blog-prik/js/utils.js"></script><script src="/blog-prik/js/motion.js"></script><script src="/blog-prik/js/schemes/muse.js"></script><script src="/blog-prik/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="referrer" content="no-referrer-when-downgrade">
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '19263f2899e033a351c4',
+      clientSecret: '85ce26d420d3c7518e20ce6dee6b6eb412164304',
+      repo        : 'hexo-gittalk',
+      owner       : 'TrZoey',
+      admin       : ['TrZoey'],
+      id          : '9dc5f06dc6a3d04cca8d514d95b6f5ab',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
