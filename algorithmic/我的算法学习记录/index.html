@@ -32,7 +32,7 @@
 <meta property="og:description" content="本文是对自己算法学习的一个记录，囊括了算法初学者需要优先掌握的各类题目及解题思路和解题方法。记录于此一方面是分享给比较迷茫的算法初学者，可以参考这个大纲来刷题；另一方面是方便自己随时回顾。代码一定要自己写，而且要经常回顾，重新写。光靠看是没有用的，不自己写一遍都不知道自己能写出多少bug。学习大纲摘自极客时间专栏：数据结构与算法之美 - 王争 - 极客时间部分算法题目参考自极客时间专栏：算法面试">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-08T13:14:28.000Z">
-<meta property="article:modified_time" content="2021-03-19T07:28:31.293Z">
+<meta property="article:modified_time" content="2021-03-23T03:55:21.547Z">
 <meta property="article:author" content="prik">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -184,7 +184,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E3%80%81%E6%A0%88%E3%80%81%E9%98%9F%E5%88%97"><span class="nav-text">数组、栈、队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-text">数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%88"><span class="nav-text">栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%9F%E5%88%97"><span class="nav-text">队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-text">链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E5%BD%92"><span class="nav-text">递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E3%80%81%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-text">排序、二分查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%B3%E8%A1%A8"><span class="nav-text">跳表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%A3%E5%88%97%E8%A1%A8"><span class="nav-text">散列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95"><span class="nav-text">哈希算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-text">二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="nav-text">红黑树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%A0%91"><span class="nav-text">B+ 树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E4%B8%8E%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="nav-text">堆与堆排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-text">图的表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="nav-text">深度广度优先搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E3%80%81%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E3%80%81A-%E7%AE%97%E6%B3%95"><span class="nav-text">拓扑排序、最短路径、A* 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88BF%E3%80%81RK%EF%BC%89"><span class="nav-text">字符串匹配（BF、RK）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88BM%E3%80%81KMP%E3%80%81AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%89"><span class="nav-text">字符串匹配（BM、KMP、AC 自动机）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88Trie%EF%BC%89"><span class="nav-text">字符串匹配（Trie）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E5%9B%BE"><span class="nav-text">位图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E7%A7%8D%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3"><span class="nav-text">四种算法思想</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%B2%BB"><span class="nav-text">分治</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83"><span class="nav-text">贪心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%BA%AF"><span class="nav-text">回溯</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E3%80%81%E6%A0%88%E3%80%81%E9%98%9F%E5%88%97"><span class="nav-text">数组、栈、队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-text">数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%88"><span class="nav-text">栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%9F%E5%88%97"><span class="nav-text">队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-text">链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E5%BD%92"><span class="nav-text">递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E3%80%81%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-text">排序、二分查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%B3%E8%A1%A8"><span class="nav-text">跳表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%A3%E5%88%97%E8%A1%A8"><span class="nav-text">散列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95"><span class="nav-text">哈希算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-text">二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="nav-text">红黑树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%A0%91"><span class="nav-text">B+ 树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E4%B8%8E%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="nav-text">堆与堆排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-text">图的表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="nav-text">深度广度优先搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E3%80%81%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E3%80%81A-%E7%AE%97%E6%B3%95"><span class="nav-text">拓扑排序、最短路径、A* 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88BF%E3%80%81RK%EF%BC%89"><span class="nav-text">字符串匹配（BF、RK）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88BM%E3%80%81KMP%E3%80%81AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%89"><span class="nav-text">字符串匹配（BM、KMP、AC 自动机）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88Trie%EF%BC%89"><span class="nav-text">字符串匹配（Trie）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E5%9B%BE"><span class="nav-text">位图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E7%A7%8D%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3"><span class="nav-text">四种算法思想</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%B2%BB"><span class="nav-text">分治</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83"><span class="nav-text">贪心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%BA%AF"><span class="nav-text">回溯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="nav-text">动态规划</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-text">其他</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -200,7 +200,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog-prik/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -213,7 +213,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/blog-prik/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -296,7 +296,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-03-19 15:28:31" itemprop="dateModified" datetime="2021-03-19T15:28:31+08:00">2021-03-19</time>
+        <time title="修改时间：2021-03-23 11:55:21" itemprop="dateModified" datetime="2021-03-23T11:55:21+08:00">2021-03-23</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -351,6 +351,7 @@
 <h2 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h2><p>对于初学者来说，这一节课完全可以不看。<br>难易程度：Hard<br>是否重点：3 分<br>掌握程度：初学者不用把时间浪费在上面</p>
 <h2 id="B-树"><a href="#B-树" class="headerlink" title="B+ 树"></a>B+ 树</h2><p>虽然 B+ 树也算是比较高级的一种数据结构了，但是对初学者来说，也不是重点。有时候面试的时候还是会问的，所以这一部分内容，你能看懂专栏里的讲解就可以了。<br>难易程度：Medium<br>是否重点：5 分<br>掌握程度：可看可不看</p>
 <h2 id="堆与堆排序"><a href="#堆与堆排序" class="headerlink" title="堆与堆排序"></a>堆与堆排序</h2><p>这一部分内容不是很难，初学者也是要掌握的。<br>难易程度：Medium<br>是否重点：8 分<br>掌握程度：能代码实现堆、堆排序，并且掌握堆的三种应用（优先级队列、Top k、中位数）</p>
+<p>TODO 347. 前 K 个高频元素  <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/top-k-frequent-elements/">https://leetcode-cn.com/problems/top-k-frequent-elements/</a></p>
 <h2 id="图的表示"><a href="#图的表示" class="headerlink" title="图的表示"></a>图的表示</h2><p>图的内容很多，但是初学者不需要掌握那么多。一般 BAT 等大厂面试，不怎么会面试有关图的内容，因为面试官可能也对这块不会很熟悉哈：）。但是，最基本图的概念、表示方法还是要掌握的。<br>难易程度：Easy<br>是否重点：8 分<br>掌握程度：理解图的三种表示方法（邻接矩阵、邻接表、逆邻接表），能自己代码实现</p>
 <h2 id="深度广度优先搜索"><a href="#深度广度优先搜索" class="headerlink" title="深度广度优先搜索"></a>深度广度优先搜索</h2><p>这算是图上最基础的遍历或者说是搜索算法了，所以还是要掌握一下。这两种算法的原理都不难哈，但是代码实现并不简单，一个用到了队列，另一个用到了递归。对于初学者来说，看懂这两个代码实现就是一个挑战！可以等到其他更重要的内容都掌握之后，再来挑战，也是可以的。<br>难易程度：Hard<br>是否重点：8 分<br>掌握程度：能代码实现广度优先、深度优先搜索算法</p>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/136238474/">102. 二叉树的层序遍历（广度优先）</a>🌟</p>
@@ -363,6 +364,13 @@
 <h3 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/132711904/">50. Pow(x, n)（求x的n次方）</a>🌟</p>
 <h3 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/136180783/">122. 买卖股票的最佳时机 II</a>🌟</p>
 <h3 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/152528407/">22. 括号生成</a>🌟</p>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/116949181/">32. 最长有效括号（动态规划）</a>🌟</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol>
+<li><ol start="7">
+<li>整数反转  <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-integer/">https://leetcode-cn.com/problems/reverse-integer/</a></li>
+</ol>
+</li>
+</ol>
 <blockquote>
 <p>作者：prik<br>永久链接： <a href="https://trzoey.github.io/blog-prik/algorithmic/%E6%88%91%E7%9A%84%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">https://trzoey.github.io/blog-prik/algorithmic/我的算法学习记录/</a><br>转载请注明出处，谢谢合作💓。</p>
 </blockquote>
