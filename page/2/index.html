@@ -258,7 +258,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://trzoey.github.io/blog-prik/algorithmic/37.%E8%A7%A3%E6%95%B0%E7%8B%AC/">
+    <link itemprop="mainEntityOfPage" href="https://trzoey.github.io/blog-prik/java-blog/GHOST%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog-prik/images/logo_white.png">
@@ -272,7 +272,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/blog-prik/algorithmic/37.%E8%A7%A3%E6%95%B0%E7%8B%AC/" class="post-title-link" itemprop="url">「刷刷刷」37.解数独</a>
+            <a href="/blog-prik/java-blog/GHOST%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">GHOST博客部署记录</a>
         </h2>
 
         <div class="post-meta-container">
@@ -283,14 +283,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2020-03-19 20:12:15" itemprop="dateCreated datePublished" datetime="2020-03-19T20:12:15+08:00">2020-03-19</time>
+      <time title="创建时间：2020-11-17 10:56:42" itemprop="dateCreated datePublished" datetime="2020-11-17T10:56:42+08:00">2020-11-17</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-03-23 15:59:12" itemprop="dateModified" datetime="2021-03-23T15:59:12+08:00">2021-03-23</time>
+        <time title="修改时间：2020-11-30 16:58:44" itemprop="dateModified" datetime="2020-11-30T16:58:44+08:00">2020-11-30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -298,7 +298,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog-prik/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+          <a href="/blog-prik/categories/%E7%9E%8E%E6%8D%A3%E9%BC%93/" itemprop="url" rel="index"><span itemprop="name">瞎捣鼓</span></a>
         </span>
     </span>
 
@@ -312,32 +312,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>编写一个程序，通过填充空格来解决数独问题。</p>
-<p>一个数独的解法需遵循如下规则：</p>
-<p>数字 1-9 在每一行只能出现一次。<br>数字 1-9 在每一列只能出现一次。<br>数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。<br>空白格用 ‘.’ 表示。</p>
-<p>提示：</p>
-<ul>
-<li>给定的数独序列只包含数字 1-9 和字符 ‘.’ 。</li>
-<li>你可以假设给定的数独只有唯一解。</li>
-<li>给定数独永远是 9x9 形式的。</li>
-</ul>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sudoku-solver">https://leetcode-cn.com/problems/sudoku-solver</a></p>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>很容易想到使用回溯算法来解题。回溯算法的定义网上很容易能搜到，比较直白的描述是：</p>
-<ul>
-<li>就像是探索一个很多个房间的迷宫，每个房间都有很多个门通向别的房间。从入口开始一个门一个门地探索，如果走到了死路，就返回上一个房间去探索其他门，知道找到终点。</li>
-</ul>
-<p>根据数独的定义，我们可以用三个二维数组来标记每行、每列、每个 3x3 内 1～9 是否已经使用过。<br>比如：<code>col[0][3] = 1 </code> 就表示第 0 列数字 3 已经使用过了。 </p>
-<p>这里比较难处理的是 3x3 该如何表示，使用一个三维数组是比较简单的做法，但为了节省空间，可以对横纵坐标进行计算后，用二维数组表示。（当然如果要更进一步节省空间，应该使用一维数组加位运算的方式）</p>
-<p>我画了个图来解释找到用一位数组表示 3x3 的过程。将每个 3x3 标记为 0～8，如果 x  轴可以转为 0，1，2，同时 y 轴转为 0，3，6，那么<code>x+y</code>就是序号。那么通过公式：<code>x/3 + y/3*3</code> 就可以将每个小格子的坐标和他们所属的 3x3 的序号对应起来了。</p>
-<p> <img data-src="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2021/03/19/shu-du.jpg" alt="数独"></p>
-<p>有了三个数组来协助判断某个个字是否可以填入数字 N 之后，就可以进行回溯了。每个格子都可以计算出能填的数字有哪些，每次填入一个数字或是回溯之后，都要更新三个数组，来保证后边填写时的判断还是正确的。</p>
-<p>如果还要优化，那么每一次填数字应该从缺少的数字最少的行、列、3x3中开始，这样正确率更高，回溯次数更少。</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注意数组长度是9，1～9 对应数字 0～8</span></span><br><span class="line">    <span class="keyword">int</span>[][] col = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">9</span>][<span class="number">9</span>];</span><br><span class="line">    <span class="keyword">int</span>[][] row = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">9</span>][<span class="number">9</span>];</span><br><span class="line">    <span class="keyword">int</span>[][] box = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">9</span>][<span class="number">9</span>];</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">solveSudoku</span><span class="params">(<span class="keyword">char</span>[][] board)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将已经填好的数字初始化进各个数组</span></span><br><span class="line">        init(board);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// n 表示每个小格子的序号，依次去尝试填数字</span></span><br><span class="line">        solveSudoku(board, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">solveSudoku</span><span class="params">(<span class="keyword">char</span>[][] board, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// n 是 0～80，81表示已经全部填完，直接返回 true</span></span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">81</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 用 n 表示每个小格子的序号，计算出 x，y 坐标</span></span><br><span class="line">        <span class="keyword">int</span> y = n % <span class="number">9</span>;</span><br><span class="line">        <span class="keyword">int</span> x = n / <span class="number">9</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果是已经填好的数字，就填下一个格子</span></span><br><span class="line">        <span class="keyword">if</span> (board[x][y] != <span class="string">&#x27;.&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> solveSudoku(board, n + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 当前小格 从 0～8 去试对不对</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 判断当前放格是否可以填入 i，如果可以</span></span><br><span class="line">            <span class="keyword">if</span> (checkSudoku(i, x, y)) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 在三个数组中标记 i 已使用</span></span><br><span class="line">                doMark(board, i, x, y);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 递归解决下一个格子</span></span><br><span class="line">                <span class="keyword">if</span> (solveSudoku(board, n + <span class="number">1</span>)) &#123;</span><br><span class="line">                    <span class="comment">// 如果后边的格子对了，返回 true 给上一个格子</span></span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 如果不对，则回溯</span></span><br><span class="line">                    undoMark(board, i, x, y);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 九个数字都试完了还不行，说明前面某个格子填的有错误，返回 false</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">checkSudoku</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (row[y][i] == <span class="number">1</span> || col[x][i] == <span class="number">1</span> || box[x / <span class="number">3</span> + y / <span class="number">3</span> * <span class="number">3</span>][i] == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doMark</span><span class="params">(<span class="keyword">char</span>[][] board, <span class="keyword">int</span> k, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 注意 0～8 和 1 ～ 9 的转换</span></span><br><span class="line">        board[x][y] = (<span class="keyword">char</span>) (k + <span class="string">&#x27;1&#x27;</span>);</span><br><span class="line">        row[y][k] = <span class="number">1</span>;</span><br><span class="line">        col[x][k] = <span class="number">1</span>;</span><br><span class="line">        box[x / <span class="number">3</span> + y / <span class="number">3</span> * <span class="number">3</span>][k] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">undoMark</span><span class="params">(<span class="keyword">char</span>[][] board, <span class="keyword">int</span> k, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        row[y][k] = <span class="number">0</span>;</span><br><span class="line">        col[x][k] = <span class="number">0</span>;</span><br><span class="line">        box[x / <span class="number">3</span> + y / <span class="number">3</span> * <span class="number">3</span>][k] = <span class="number">0</span>;</span><br><span class="line">        board[x][y] = <span class="string">&#x27;.&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">char</span>[][] board)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; <span class="number">9</span>; x++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> y = <span class="number">0</span>; y &lt; <span class="number">9</span>; y++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (board[x][y] != <span class="string">&#x27;.&#x27;</span>) &#123;</span><br><span class="line">                    <span class="comment">// 注意 0～8 和 1 ～ 9 的转换</span></span><br><span class="line">                    <span class="keyword">int</span> k = board[x][y] - <span class="string">&#x27;1&#x27;</span>;</span><br><span class="line">                    row[y][k] = <span class="number">1</span>;</span><br><span class="line">                    col[x][k] = <span class="number">1</span>;</span><br><span class="line">                    box[x / <span class="number">3</span> + y / <span class="number">3</span> * <span class="number">3</span>][k] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>作者：prik<br>永久链接： <a href="https://trzoey.github.io/blog-prik/algorithmic/37.%E8%A7%A3%E6%95%B0%E7%8B%AC/">https://trzoey.github.io/blog-prik/algorithmic/37.解数独/</a><br>转载请注明出处，谢谢合作💓。</p>
-</blockquote>
-
+          <p>记录一下捣鼓Ghost的过程。坑很多，好不容易捣鼓好了，却找不到一个好用的主题。还是Hexo香。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog-prik/java-blog/GHOST%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
