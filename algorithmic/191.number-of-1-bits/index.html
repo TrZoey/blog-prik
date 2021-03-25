@@ -24,31 +24,22 @@
     var CONFIG = {"hostname":"trzoey.github.io","root":"/blog-prik/","scheme":"Mist","version":"8.0.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="记录一下捣鼓Ghost的过程。坑很多，好不容易捣鼓好了，却找不到一个好用的主题。还是Hexo香。">
+  <meta name="description" content="题目难度：简单 编写一个函数，输入是一个无符号整数（以二进制串的形式），返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为汉明重量）。 提示：  请注意，在某些语言（如 Java）中，没有无符号整数类型。在这种情况下，输入和输出都将被指定为有符号整数类型，并且不应影响您的实现，因为无论整数是有符号的还是无符号的，其内部的二进制表示形式都是相同的。 在 Java 中，编译器使用二进制补码记法来">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GHOST博客部署记录">
-<meta property="og:url" content="https://trzoey.github.io/blog-prik/java-blog/GHOST%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:title" content="「刷刷刷」191. 位 1 的个数">
+<meta property="og:url" content="https://trzoey.github.io/blog-prik/algorithmic/191.number-of-1-bits/index.html">
 <meta property="og:site_name" content="PRIK&#39;s BLOG">
-<meta property="og:description" content="记录一下捣鼓Ghost的过程。坑很多，好不容易捣鼓好了，却找不到一个好用的主题。还是Hexo香。">
+<meta property="og:description" content="题目难度：简单 编写一个函数，输入是一个无符号整数（以二进制串的形式），返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为汉明重量）。 提示：  请注意，在某些语言（如 Java）中，没有无符号整数类型。在这种情况下，输入和输出都将被指定为有符号整数类型，并且不应影响您的实现，因为无论整数是有符号的还是无符号的，其内部的二进制表示形式都是相同的。 在 Java 中，编译器使用二进制补码记法来">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2020/11/17/16056025635209.jpg">
-<meta property="og:image" content="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2020/11/17/16056026982693.jpg">
-<meta property="og:image" content="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2020/11/17/16056029401727.jpg">
-<meta property="og:image" content="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2020/11/17/16056029546965.jpg">
-<meta property="og:image" content="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2020/11/17/16056029648561.jpg">
-<meta property="og:image" content="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2020/11/17/16056029776362.jpg">
-<meta property="og:image" content="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2020/11/17/16056029964463.jpg">
-<meta property="og:image" content="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2020/11/17/16056030059414.jpg">
-<meta property="article:published_time" content="2020-11-17T02:56:42.000Z">
-<meta property="article:modified_time" content="2020-11-30T08:58:44.139Z">
+<meta property="article:published_time" content="2021-03-25T12:55:10.000Z">
+<meta property="article:modified_time" content="2021-03-25T13:25:56.377Z">
 <meta property="article:author" content="prik">
-<meta property="article:tag" content="Java">
-<meta property="article:tag" content="项目">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="算法&#x2F;位运算">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2020/11/17/16056025635209.jpg">
 
 
-<link rel="canonical" href="https://trzoey.github.io/blog-prik/java-blog/GHOST%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/">
+<link rel="canonical" href="https://trzoey.github.io/blog-prik/algorithmic/191.number-of-1-bits/">
 
 
 <script class="page-configurations">
@@ -61,7 +52,7 @@
   };
 </script>
 
-  <title>GHOST博客部署记录 | PRIK's BLOG</title>
+  <title>「刷刷刷」191. 位 1 的个数 | PRIK's BLOG</title>
   
 
 
@@ -194,7 +185,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E4%B8%80%E5%8F%B0%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">准备一台云服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85node"><span class="nav-text">安装node</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85nginx"><span class="nav-text">安装nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85yarn"><span class="nav-text">安装yarn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-ghost-cli"><span class="nav-text">安装 ghost-cli</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%B0%E7%94%A8%E6%88%B7"><span class="nav-text">创建新用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-ghost"><span class="nav-text">安装 ghost</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-text">代码</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -275,7 +266,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://trzoey.github.io/blog-prik/java-blog/GHOST%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/">
+    <link itemprop="mainEntityOfPage" href="https://trzoey.github.io/blog-prik/algorithmic/191.number-of-1-bits/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog-prik/images/logo_white.png">
@@ -288,7 +279,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          GHOST博客部署记录
+          「刷刷刷」191. 位 1 的个数
         </h1>
 
         <div class="post-meta-container">
@@ -298,23 +289,17 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-11-17 10:56:42" itemprop="dateCreated datePublished" datetime="2020-11-17T10:56:42+08:00">2020-11-17</time>
+      <time title="创建时间：2021-03-25 20:55:10 / 修改时间：21:25:56" itemprop="dateCreated datePublished" datetime="2021-03-25T20:55:10+08:00">2021-03-25</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-11-30 16:58:44" itemprop="dateModified" datetime="2020-11-30T16:58:44+08:00">2020-11-30</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog-prik/categories/%E7%9E%8E%E6%8D%A3%E9%BC%93/" itemprop="url" rel="index"><span itemprop="name">瞎捣鼓</span></a>
+          <a href="/blog-prik/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
         </span>
     </span>
 
@@ -328,7 +313,6 @@
     </span>
 </div>
 
-            <div class="post-description">记录一下捣鼓Ghost的过程。坑很多，好不容易捣鼓好了，却找不到一个好用的主题。还是Hexo香。</div>
         </div>
       </header>
 
@@ -336,48 +320,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="准备一台云服务器"><a href="#准备一台云服务器" class="headerlink" title="准备一台云服务器"></a>准备一台云服务器</h2><p>我使用的是CentOS系统，官方建议Ubuntu，最好根据官方的来，CentOS确实有非常多坑。</p>
-<h2 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y nodejs</span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
-<p> <img data-src="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2020/11/17/16056025635209.jpg"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm cache clean -f</span><br><span class="line">npm install n -g</span><br><span class="line">n stable</span><br></pre></td></tr></table></figure>
+        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p><code>难度：简单</code></p>
+<p>编写一个函数，输入是一个无符号整数（以二进制串的形式），返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为汉明重量）。</p>
+<p>提示：</p>
+<ul>
+<li>请注意，在某些语言（如 Java）中，没有无符号整数类型。在这种情况下，输入和输出都将被指定为有符号整数类型，并且不应影响您的实现，因为无论整数是有符号的还是无符号的，其内部的二进制表示形式都是相同的。</li>
+<li>在 Java 中，编译器使用二进制补码记法来表示有符号整数。因此，在上面的 示例 3 中，输入表示有符号整数 -3。</li>
+</ul>
+<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-1-bits">https://leetcode-cn.com/problems/number-of-1-bits</a></p>
+<a id="more"></a>
 
-<p> <img data-src="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2020/11/17/16056026982693.jpg"></p>
-<p>安装成功，发现版本没有变化。需要将安装目录添加到环境变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>位运算，去除二进制数最后一个 1 的方法：x &amp; (x  - 1)。不断去除末尾的 1 并计数，直到 x = 0时，循环次数就是 1 的个数。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">// you need to treat n as an unsigned value</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hammingWeight</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</span><br><span class="line">            count ++;</span><br><span class="line">            n = n &amp; (n - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> <img data-src="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2020/11/17/16056029401727.jpg"></p>
-<p>保存后刷新</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;etc&#x2F;profile</span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
 
-<p> <img data-src="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2020/11/17/16056029546965.jpg"></p>
-<h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y nginx</span><br></pre></td></tr></table></figure>
-
-<p> <img data-src="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2020/11/17/16056029648561.jpg"></p>
-<h2 id="安装yarn"><a href="#安装yarn" class="headerlink" title="安装yarn"></a>安装yarn</h2><p>官方的Yarn存储库会得到持续维护，并提供最新版本。要启用Yarn存储库并导入存储库的GPG密钥：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl --silent --location https:&#x2F;&#x2F;dl.yarnpkg.com&#x2F;rpm&#x2F;yarn.repo | sudo tee &#x2F;etc&#x2F;yum.repos.d&#x2F;yarn.repo&#96;</span><br><span class="line">sudo rpm --import https:&#x2F;&#x2F;dl.yarnpkg.com&#x2F;rpm&#x2F;pubkey.gpg</span><br><span class="line">yum install yarn</span><br></pre></td></tr></table></figure>
-
-<p>注意需要保证在公共目录下</p>
-<p><img data-src="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2020/11/17/16056029776362.jpg"></p>
-<h2 id="安装-ghost-cli"><a href="#安装-ghost-cli" class="headerlink" title="安装 ghost-cli"></a>安装 ghost-cli</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn global add ghost-cli@latest</span><br></pre></td></tr></table></figure>
-
-<h2 id="创建新用户"><a href="#创建新用户" class="headerlink" title="创建新用户"></a>创建新用户</h2><p>ghost 不能用root用户启动</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adduser user_ghost</span><br><span class="line">passwd user_ghost</span><br><span class="line">su user_ghost</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装-ghost"><a href="#安装-ghost" class="headerlink" title="安装 ghost"></a>安装 ghost</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 创建目录</span><br><span class="line">sudo mkdir &#x2F;var&#x2F;www&#x2F;ghost</span><br><span class="line"># 修改用户&#x2F;用户组为刚才创建的用户</span><br><span class="line">sudo chown user_ghost:user_ghost &#x2F;usr&#x2F;local&#x2F;ghost</span><br><span class="line"># 进入目录</span><br><span class="line">cd &#x2F;var&#x2F;www&#x2F;ghost</span><br><span class="line"># 执行安装指令</span><br><span class="line">ghost install</span><br></pre></td></tr></table></figure>
-
-<p><img data-src="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2020/11/17/16056029964463.jpg"></p>
-<p>安装好后会要求输入一些配置，随后可以在配置文件中修改。注意还需要安装mysql，这里省略。</p>
-<p><img data-src="http://hexo-media.oss-cn-shanghai.aliyuncs.com/2020/11/17/16056030059414.jpg"></p>
-<p>CentOS下启动会报错，使用下边指令启动。服务名称看安装时生成的，如上图红框，格式为ghost_[blogUrl].service</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 启动：</span><br><span class="line">sudo systemctl start ghost_118.190.55.152.service</span><br><span class="line"># 查看状态：</span><br><span class="line">sudo systemctl status ghost_118.190.55.152.service</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/92463874">CentOS 7 安装配置 Ghost</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/33091812">Ghost 搭建博客笔记</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.xuanhen.cn/ghost-ken-die-xi-lie-bao-cuo-wen-ti-ji-jie-jue-fang-fa/">ghost报错问题及解决方法</a></li>
-</ol>
 <blockquote>
-<p>作者：prik<br>永久链接： <a href="https://trzoey.github.io/blog-prik/java-blog/GHOST%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/">https://trzoey.github.io/blog-prik/java-blog/GHOST博客部署记录/</a><br>转载请注明出处，谢谢合作💓。</p>
+<p>作者：prik<br>永久链接： <a href="https://trzoey.github.io/blog-prik/algorithmic/191.number-of-1-bits/">https://trzoey.github.io/blog-prik/algorithmic/191.number-of-1-bits/</a><br>转载请注明出处，谢谢合作💓。</p>
 </blockquote>
 
     </div>
@@ -388,21 +346,21 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog-prik/tags/Java/" rel="tag"># Java</a>
-              <a href="/blog-prik/tags/%E9%A1%B9%E7%9B%AE/" rel="tag"># 项目</a>
+              <a href="/blog-prik/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/blog-prik/tags/%E7%AE%97%E6%B3%95-%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="tag"># 算法/位运算</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/blog-prik/reading-notes/%E3%80%8A%E6%96%AF%E5%9D%A6%E7%A6%8F%E9%AB%98%E6%95%88%E7%9D%A1%E7%9C%A0%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="prev" title="《斯坦福高效睡眠法》读书笔记">
-                  <i class="fa fa-chevron-left"></i> 《斯坦福高效睡眠法》读书笔记
+                <a href="/blog-prik/algorithmic/51.n-queens/" rel="prev" title="「刷刷刷」51.N皇后">
+                  <i class="fa fa-chevron-left"></i> 「刷刷刷」51.N皇后
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/blog-prik/java-notes/%E6%94%B6%E8%97%8F%E5%A4%B9/" rel="next" title="优秀书籍、文章、专栏收集及推荐（持续更新 ...）">
-                  优秀书籍、文章、专栏收集及推荐（持续更新 ...） <i class="fa fa-chevron-right"></i>
+                <a href="/blog-prik/algorithmic/231.power-of-two/" rel="next" title="「刷刷刷」231. 2 的幂">
+                  「刷刷刷」231. 2 的幂 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -533,7 +491,7 @@ NexT.utils.loadComments('#gitalk-container', () => {
       repo        : 'hexo-gittalk',
       owner       : 'TrZoey',
       admin       : ['TrZoey'],
-      id          : '51b2a3468b676ce617d03081d973f906',
+      id          : '3a0609184e786c9bfdbd6163b56c8964',
         language: 'zh-CN',
       distractionFreeMode: true
     });

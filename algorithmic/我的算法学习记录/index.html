@@ -32,7 +32,7 @@
 <meta property="og:description" content="本文是对自己算法学习的一个记录，囊括了算法初学者需要优先掌握的各类题目及解题思路和解题方法。记录于此一方面是分享给比较迷茫的算法初学者，可以参考这个大纲来刷题；另一方面是方便自己随时回顾。代码一定要自己写，而且要经常回顾，重新写。光靠看是没有用的，不自己写一遍都不知道自己能写出多少bug。学习大纲摘自极客时间专栏：数据结构与算法之美 - 王争 - 极客时间部分算法题目参考自极客时间专栏：算法面试">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-08T13:14:28.000Z">
-<meta property="article:modified_time" content="2021-03-23T08:49:59.438Z">
+<meta property="article:modified_time" content="2021-03-25T13:24:12.329Z">
 <meta property="article:author" content="prik">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -184,7 +184,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E3%80%81%E6%A0%88%E3%80%81%E9%98%9F%E5%88%97"><span class="nav-text">数组、栈、队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-text">数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%88"><span class="nav-text">栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%9F%E5%88%97"><span class="nav-text">队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-text">链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E5%BD%92"><span class="nav-text">递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E3%80%81%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-text">排序、二分查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%B3%E8%A1%A8"><span class="nav-text">跳表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%A3%E5%88%97%E8%A1%A8"><span class="nav-text">散列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95"><span class="nav-text">哈希算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-text">二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="nav-text">红黑树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%A0%91"><span class="nav-text">B+ 树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E4%B8%8E%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="nav-text">堆与堆排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-text">图的表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="nav-text">深度广度优先搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E3%80%81%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E3%80%81A-%E7%AE%97%E6%B3%95"><span class="nav-text">拓扑排序、最短路径、A* 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88BF%E3%80%81RK%EF%BC%89"><span class="nav-text">字符串匹配（BF、RK）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88BM%E3%80%81KMP%E3%80%81AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%89"><span class="nav-text">字符串匹配（BM、KMP、AC 自动机）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88Trie%EF%BC%89"><span class="nav-text">字符串匹配（Trie）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E5%9B%BE"><span class="nav-text">位图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E7%A7%8D%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3"><span class="nav-text">四种算法思想</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%B2%BB"><span class="nav-text">分治</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83"><span class="nav-text">贪心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%BA%AF"><span class="nav-text">回溯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="nav-text">动态规划</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-text">其他</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E3%80%81%E6%A0%88%E3%80%81%E9%98%9F%E5%88%97"><span class="nav-text">数组、栈、队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-text">数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%88"><span class="nav-text">栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%9F%E5%88%97"><span class="nav-text">队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-text">链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E5%BD%92"><span class="nav-text">递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E3%80%81%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-text">排序、二分查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%B3%E8%A1%A8"><span class="nav-text">跳表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%A3%E5%88%97%E8%A1%A8"><span class="nav-text">散列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95"><span class="nav-text">哈希算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-text">二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="nav-text">红黑树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%A0%91"><span class="nav-text">B+ 树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E4%B8%8E%E5%A0%86%E6%8E%92%E5%BA%8F"><span class="nav-text">堆与堆排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-text">图的表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="nav-text">深度广度优先搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E3%80%81%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E3%80%81A-%E7%AE%97%E6%B3%95"><span class="nav-text">拓扑排序、最短路径、A* 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88BF%E3%80%81RK%EF%BC%89"><span class="nav-text">字符串匹配（BF、RK）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88BM%E3%80%81KMP%E3%80%81AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%89"><span class="nav-text">字符串匹配（BM、KMP、AC 自动机）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%EF%BC%88Trie%EF%BC%89"><span class="nav-text">字符串匹配（Trie）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E5%9B%BE"><span class="nav-text">位图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E7%A7%8D%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3"><span class="nav-text">四种算法思想</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%B2%BB"><span class="nav-text">分治</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83"><span class="nav-text">贪心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E6%BA%AF"><span class="nav-text">回溯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="nav-text">动态规划</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97"><span class="nav-text">位运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-text">其他</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -200,7 +200,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog-prik/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -213,7 +213,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/blog-prik/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -296,7 +296,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-03-23 16:49:59" itemprop="dateModified" datetime="2021-03-23T16:49:59+08:00">2021-03-23</time>
+        <time title="修改时间：2021-03-25 21:24:12" itemprop="dateModified" datetime="2021-03-25T21:24:12+08:00">2021-03-25</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -334,49 +334,102 @@
 <p>难易程度：Medium<br>是否重点：10 分<br>掌握程度：在不看我的分析的情况下，能自行分析专栏中大部分数据结构和算法的时间、空间复杂度</p>
 <h2 id="数组、栈、队列"><a href="#数组、栈、队列" class="headerlink" title="数组、栈、队列"></a>数组、栈、队列</h2><p>这一部分内容非常简单，初学者学起来也不会很难。但是，作为基础的数据结构，数组、栈、队列，是后续很多复杂数据结构和算法的基础，所以，这些内容你一定要掌握。</p>
 <p>难易程度：Easy<br>是否重点：8 分<br>掌握程度：能自己实现动态数组、栈、队列</p>
-<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p><a href="/blog-prik/algorithmic/15.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">88. 合并两个有序数组</a><br><a href="/blog-prik/algorithmic/88.%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84/">15. 三数之和</a>🌟<br><a href="/blog-prik/algorithmic/169.%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0/">169. 找众数（多数元素）</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115991054/">41. 缺失的第一个正数（原地哈希）</a>🌟</p>
-<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/116212481/">20. 有效的括号</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/116949181/">32. 最长有效括号（动态规划）</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/116958795/">32. 最长有效括号（正逆向结合）</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/116979139/">32. 最长有效括号（栈）</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/117035010/">155. 最小栈（辅助栈）</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-queue-using-stacks/solution/yong-zhan-shi-xian-dui-lie-by-leetcode/">232. 用栈实现队列（用两个栈来回倒腾）</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/117617906/">844. 比较含退格的字符串</a><br>TODO 224,682,496</p>
-<h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/122351390/">703. 数据流中的第K大元素（优先级队列）</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/127670400/">239. 滑动窗口最大值（双端队列）</a>🌟</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><ul>
+<li><a href="/blog-prik/algorithmic/15.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">88. 合并两个有序数组</a></li>
+<li><a href="/blog-prik/algorithmic/88.%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84/">15. 三数之和</a>🌟</li>
+<li><a href="/blog-prik/algorithmic/169.%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0/">169. 找众数（多数元素）</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115991054/">41. 缺失的第一个正数（原地哈希）</a>🌟</li>
+</ul>
+<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/116212481/">20. 有效的括号</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/116949181/">32. 最长有效括号（动态规划）</a>🌟</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/116958795/">32. 最长有效括号（正逆向结合）</a>🌟</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/116979139/">32. 最长有效括号（栈）</a>🌟</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/117035010/">155. 最小栈（辅助栈）</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-queue-using-stacks/solution/yong-zhan-shi-xian-dui-lie-by-leetcode/">232. 用栈实现队列（用两个栈来回倒腾）</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/117617906/">844. 比较含退格的字符串</a></li>
+<li>🔺 224,682,496</li>
+</ul>
+<h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/122351390/">703. 数据流中的第K大元素（优先级队列）</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/127670400/">239. 滑动窗口最大值（双端队列）</a>🌟</li>
+</ul>
 <h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><p>链表非常重要！虽然理论内容不多，但链表上的操作却很复杂。所以，面试中经常会考察，你一定要掌握。而且，我这里说“掌握”不只是能看懂专栏中的内容，还能将专栏中提到的经典链表题目，比如链表反转、求中间结点等，轻松无 bug 地实现出来。</p>
 <p>难易程度：Medium<br>是否重点：9 分<br>掌握程度：能轻松写出经典链表题目代码</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115694463/">206. 反转链表</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115711094/">208. 合并两个有序链表</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115714967/">876. 寻找链表的中间节点</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115720051/">141. 环形链表（判断是否有环）</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115736686/">142. 环形链表（找入环点）</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115883926/">23. 合并K个升序链表</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/117024625/">19. 删除链表倒数第N个节点</a>🌟（重做）</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115694463/">206. 反转链表</a>🌟</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115711094/">208. 合并两个有序链表</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115714967/">876. 寻找链表的中间节点</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115720051/">141. 环形链表（判断是否有环）</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115736686/">142. 环形链表（找入环点）</a>🌟</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/115883926/">23. 合并K个升序链表</a>🌟</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/117024625/">19. 删除链表倒数第N个节点</a>🌟（重做）</li>
+</ul>
 <h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><p>对于初学者来说，递归代码非常难掌握，不管是读起来，还是写起来。但是，这道坎你必须要跨过，跨不过就不能算是入门数据结构和算法。我们后面讲到的很多数据结构和算法的代码实现，都要用到递归。<br>递归相关的理论知识也不多，所以还是要多练。你可以先在网上找些简单的题目练手，比如斐波那契数列、求阶乘等，然后再慢慢过渡到更加有难度的，比如归并排序、快速排序、二叉树的遍历、求高度，最后是回溯八皇后、背包问题等。<br>难易程度：Hard<br>是否重点：10 分<br>掌握程度：轻松写出二叉树遍历、八皇后、背包问题、DFS 的递归代码</p>
-<ol>
+<ul>
 <li><ol start="322">
-<li>零钱兑换</li>
+<li>零钱兑换 🔺</li>
 </ol>
 </li>
-</ol>
+</ul>
 <h2 id="排序、二分查找"><a href="#排序、二分查找" class="headerlink" title="排序、二分查找"></a>排序、二分查找</h2><p>这一部分并不难，你只需要能看懂我专栏里的内容即可。<br>难易程度：Easy<br>是否重点：7 分<br>掌握程度：能自己把各种排序算法、二分查找及其变体代码写一遍就可以了</p>
 <h2 id="跳表"><a href="#跳表" class="headerlink" title="跳表"></a>跳表</h2><p>对于初学者来说，并不需要非得掌握跳表，所以，如果没有精力，这一章节可以先跳过。<br>难易程度：Medium<br>是否重点：6 分<br>掌握程度：初学者可以先跳过。如果感兴趣，看懂专栏内容即可，不需要掌握代码实现</p>
 <h2 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h2><p>尽管散列表的内容我讲了很多，有三节课。但是，总体上来讲，这块内容理解起来并不难。但是，作为一种应用非常广泛的数据结构，你还是要掌握牢固散列表。<br>难易程度：Medium<br>是否重点：8 分<br>掌握程度：对于初学者来说，自己能代码实现一个拉链法解决冲突的散列表即可</p>
 <h2 id="哈希算法"><a href="#哈希算法" class="headerlink" title="哈希算法"></a>哈希算法</h2><p>这部分纯粹是为了开拓思路，初学者可以略过。<br>难易程度：Easy<br>是否重点：3 分<br>掌握程度：可以暂时不看</p>
 <h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><p>这一部分非常重要！二叉树在面试中经常会被考到，所以要重点掌握。但是我这里说的二叉树，并不包含专栏中红黑树的内容。红黑树我们待会再讲。<br>难易程度：Medium<br>是否重点：9 分<br>掌握程度：能代码实现二叉树的三种遍历算法、按层遍历、求高度等经典二叉树题目</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/129685104/">94. 二叉树的中序遍历（144、145前/后序遍历）</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/129531789/">98. 验证二叉搜索树（递归）</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/129690118/">98. 验证二叉搜索树（中序遍历）</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/131074768/">236. 二叉树的最近公共祖先</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/131934712/">235. 二叉搜索树的最近公共祖先</a>🌟<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/136238474/">102. 二叉树的层序遍历（广度优先）</a>🌟</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/129685104/">94. 二叉树的中序遍历（144、145前/后序遍历）</a>🌟</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/129531789/">98. 验证二叉搜索树（递归）</a>🌟</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/129690118/">98. 验证二叉搜索树（中序遍历）</a>🌟</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/131074768/">236. 二叉树的最近公共祖先</a>🌟</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/131934712/">235. 二叉搜索树的最近公共祖先</a>🌟</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/136238474/">102. 二叉树的层序遍历（广度优先）</a>🌟</li>
+</ul>
 <p>105、107、987、104、111、</p>
 <h2 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h2><p>对于初学者来说，这一节课完全可以不看。<br>难易程度：Hard<br>是否重点：3 分<br>掌握程度：初学者不用把时间浪费在上面</p>
 <h2 id="B-树"><a href="#B-树" class="headerlink" title="B+ 树"></a>B+ 树</h2><p>虽然 B+ 树也算是比较高级的一种数据结构了，但是对初学者来说，也不是重点。有时候面试的时候还是会问的，所以这一部分内容，你能看懂专栏里的讲解就可以了。<br>难易程度：Medium<br>是否重点：5 分<br>掌握程度：可看可不看</p>
 <h2 id="堆与堆排序"><a href="#堆与堆排序" class="headerlink" title="堆与堆排序"></a>堆与堆排序</h2><p>这一部分内容不是很难，初学者也是要掌握的。<br>难易程度：Medium<br>是否重点：8 分<br>掌握程度：能代码实现堆、堆排序，并且掌握堆的三种应用（优先级队列、Top k、中位数）</p>
-<p>TODO 347. 前 K 个高频元素  <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/top-k-frequent-elements/">https://leetcode-cn.com/problems/top-k-frequent-elements/</a></p>
+<ul>
+<li>🔺 347. 前 K 个高频元素  <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/top-k-frequent-elements/">https://leetcode-cn.com/problems/top-k-frequent-elements/</a></li>
+</ul>
 <h2 id="图的表示"><a href="#图的表示" class="headerlink" title="图的表示"></a>图的表示</h2><p>图的内容很多，但是初学者不需要掌握那么多。一般 BAT 等大厂面试，不怎么会面试有关图的内容，因为面试官可能也对这块不会很熟悉哈：）。但是，最基本图的概念、表示方法还是要掌握的。<br>难易程度：Easy<br>是否重点：8 分<br>掌握程度：理解图的三种表示方法（邻接矩阵、邻接表、逆邻接表），能自己代码实现</p>
 <h2 id="深度广度优先搜索"><a href="#深度广度优先搜索" class="headerlink" title="深度广度优先搜索"></a>深度广度优先搜索</h2><p>这算是图上最基础的遍历或者说是搜索算法了，所以还是要掌握一下。这两种算法的原理都不难哈，但是代码实现并不简单，一个用到了队列，另一个用到了递归。对于初学者来说，看懂这两个代码实现就是一个挑战！可以等到其他更重要的内容都掌握之后，再来挑战，也是可以的。<br>难易程度：Hard<br>是否重点：8 分<br>掌握程度：能代码实现广度优先、深度优先搜索算法</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/136238474/">102. 二叉树的层序遍历（广度优先）</a>🌟</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/136238474/">102. 二叉树的层序遍历（广度优先）</a>🌟</li>
+</ul>
 <h2 id="拓扑排序、最短路径、A-算法"><a href="#拓扑排序、最短路径、A-算法" class="headerlink" title="拓扑排序、最短路径、A* 算法"></a>拓扑排序、最短路径、A* 算法</h2><p>这几个算法稍微高级点。如果你能轻松实现深度、广度优先搜索，那看懂这三个算法不成问题。不过，这三种算法不是重点。面试不会考的。<br>难易程度：Hard<br>是否重点：5 分<br>掌握程度：有时间再看，暂时可以不看</p>
 <h2 id="字符串匹配（BF、RK）"><a href="#字符串匹配（BF、RK）" class="headerlink" title="字符串匹配（BF、RK）"></a>字符串匹配（BF、RK）</h2><p>BF 非常简单，RK 稍微复杂点，但都不难。这个最好还是掌握下。<br>难易程度：Easy<br>是否重点：7 分<br>掌握程度：能实践 BF 算法，能看懂 RK 算法</p>
 <h2 id="字符串匹配（BM、KMP、AC-自动机）"><a href="#字符串匹配（BM、KMP、AC-自动机）" class="headerlink" title="字符串匹配（BM、KMP、AC 自动机）"></a>字符串匹配（BM、KMP、AC 自动机）</h2><p>这三个算法都挺难的，对于算法有一定基础的人来说，看懂也不容易。所以，对于初学者来说，千万别浪费时间在这上面。即便有余力，看懂就好了，不用非得能自己实现。<br>难易程度：Hard<br>是否重点：3 分<br>掌握程度：初学者不用把时间浪费在上面</p>
 <h2 id="字符串匹配（Trie）"><a href="#字符串匹配（Trie）" class="headerlink" title="字符串匹配（Trie）"></a>字符串匹配（Trie）</h2><p>这个还是要能看懂，不过不需要能代码实现。有些面试官喜欢考这个东西，主要是结合应用场景来考察，只是看你知不知道要用 Trie 树这个东西。<br>难易程度：Medium<br>是否重点：7 分<br>掌握程度：能看懂，知道特点、应用场景即可，不要求代码实现</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/159158373/">208. 实现 Trie (前缀树)</a></li>
+</ul>
 <h2 id="位图"><a href="#位图" class="headerlink" title="位图"></a>位图</h2><p>位图不是重点，如果有余力最好掌握一下。<br>难易程度：Easy<br>是否重点：6 分<br>掌握程度：看懂即可，能自己实现一个位图结构最好</p>
 <h2 id="四种算法思想"><a href="#四种算法思想" class="headerlink" title="四种算法思想"></a>四种算法思想</h2><p>这个是重点，也是难点。<strong>贪心、分治、回溯、动态规划</strong>，每一个都不简单，其中动态规划又是最难、最烧脑的。要应付 FLAG 这样公司的面试，必须拿下这块内容。但是呢，学习要循序渐进，这块内容的学习可以放到最后，做个长时间的学习计划来攻克。这块内容理论的东西不多，要想真的掌握，还是要大量刷题。<br>难易程度：Hard<br>是否重点：10 分<br>掌握程度：可以放到最后，但是一定要掌握！做到能实现 Leetcode 上 Medium 难度的题目</p>
-<h3 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/132711904/">50. Pow(x, n)（求x的n次方）</a>🌟</p>
-<h3 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/136180783/">122. 买卖股票的最佳时机 II</a>🌟</p>
-<h3 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h3><p><a href="/blog-prik/algorithmic/37.%E8%A7%A3%E6%95%B0%E7%8B%AC/">37. 解数独</a><br><a href="/blog-prik/algorithmic/51.n-queens/">51. N皇后</a></p>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/116949181/">32. 最长有效括号（动态规划）</a>🌟</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol>
-<li><ol start="7">
-<li>整数反转  <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-integer/">https://leetcode-cn.com/problems/reverse-integer/</a></li>
+<h3 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/132711904/">50. Pow(x, n)（求x的n次方）</a>🌟</li>
+</ul>
+<h3 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/136180783/">122. 买卖股票的最佳时机 II</a>🌟</li>
+</ul>
+<h3 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h3><ul>
+<li><a href="/blog-prik/algorithmic/37.%E8%A7%A3%E6%95%B0%E7%8B%AC/">37. 解数独</a></li>
+<li><a href="/blog-prik/algorithmic/51.n-queens/">51. N皇后</a></li>
+</ul>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/submissions/detail/116949181/">32. 最长有效括号（动态规划）</a>🌟</li>
+</ul>
+<h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><ul>
+<li><a href="/blog-prik/algorithmic/191.number-of-1-bits">191. 位1的个数</a></li>
+<li><a href="/blog-prik/algorithmic/231.power-of-two">231. 2 的幂</a></li>
+<li><a href="/blog-prik/algorithmic/338.counting-bits">338. 比特位计数</a></li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li><ol>
+<li>整数反转  <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-integer/">https://leetcode-cn.com/problems/reverse-integer/</a> 🔺</li>
 </ol>
 </li>
-</ol>
+</ul>
 <blockquote>
 <p>作者：prik<br>永久链接： <a href="https://trzoey.github.io/blog-prik/algorithmic/%E6%88%91%E7%9A%84%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">https://trzoey.github.io/blog-prik/algorithmic/我的算法学习记录/</a><br>转载请注明出处，谢谢合作💓。</p>
 </blockquote>
